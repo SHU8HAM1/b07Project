@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "435000304776",
+    "firebase_url": "https://b07project-d4d14-default-rtdb.firebaseio.com",
+    "project_id": "b07project-d4d14",
+    "storage_bucket": "b07project-d4d14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435000304776:android:d5a6eaca84b4200aa32b3d",
+        "android_client_info": {
+          "package_name": "com.example.b07project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQKP_9TA6l9dx0yM9yRsJI6OrNVEVl2TU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
