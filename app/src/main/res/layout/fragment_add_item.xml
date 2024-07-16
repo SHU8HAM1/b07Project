@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/item_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:text="@string/example_yellow_vase"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="131dp" />
+
+    <TextView
+        android:id="@+id/textLotNumber"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/lot_number"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="68dp" />
+
+    <EditText
+        android:id="@+id/editLotNumber"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="68dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="142dp"
+        tools:hint="Example: 12345678" />
+
+    <TextView
+        android:id="@+id/textCategory"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/category"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="184dp" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="184dp"
+        tools:hint="Example: Lacquer" />
+
+    <TextView
+        android:id="@+id/textPeriod"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/period"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="245dp" />
+
+    <Spinner
+        android:id="@+id/spinnerPeriod"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="246dp"
+        tools:hint="Example: Xia" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/description"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="320dp" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="260dp"
+        android:layout_height="110dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:hint="Provide details"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="320dp" />
+
+    <TextView
+        android:id="@+id/textUpload"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:gravity="start|center"
+        android:text="@string/picture_video"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="449dp" />
+
+    <Button
+        android:id="@+id/buttonUpload"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        tools:hint="Upload File Here"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="449dp" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="146dp"
+        android:layout_height="84dp"
+        tools:hint="Submit"
+        tools:layout_editor_absoluteX="249dp"
+        tools:layout_editor_absoluteY="686dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
