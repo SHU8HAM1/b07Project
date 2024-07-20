@@ -15,11 +15,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.b07project.R;
 
+import java.util.ArrayList;
+
 public class AddItemFragment extends Fragment{
-    private EditText editLotNumber, editName, editDescription;
-    private Spinner spinnerCategory, spinnerPeriod;
-    private Button buttonUpload, buttonSubmit;
-    private AddItemPresenter presenter;
+    protected EditText editLotNumber, editName, editDescription;
+    protected Spinner spinnerCategory, spinnerPeriod;
+    protected Button buttonUpload, buttonSubmit;
+    protected AddItemPresenter presenter;
 
     @Nullable
     @Override
@@ -34,29 +36,46 @@ public class AddItemFragment extends Fragment{
         buttonUpload = view.findViewById(R.id.buttonUpload);
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
 
-        presenter = new AddItemPresenter(this, new AddItemModel());
+        presenter = new AddItemPresenter(this);
 
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.categories_array, android.R.layout.simple_spinner_item), periodAdapter =
-                ArrayAdapter.createFromResource(getContext(), R.array.periods_array,
-                        android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        periodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(categoryAdapter);
-        spinnerPeriod.setAdapter(periodAdapter);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               addItem();
+               String lotNumString =  editLotNumber.getText().toString();
+               String name = editName.getText().toString().trim();
+               String description = editDescription.getText().toString().trim();
+               String category = spinnerCategory.getSelectedItem().toString();
+               String period = spinnerPeriod.getSelectedItem().toString();
+               presenter.checkItem(lotNumString, name, description, category, period);
            }
         });
+
         return view;
-
     }
 
-    private void addItem(){
-
+    public void addSuccess(boolean added){
+        if (added) {
+            displayMessage("Item added");
+        } else {
+            displayMessage("Failed to add item");
+        }
     }
 
+    public void displayMessage(String msg){
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
+    public void popSpinnerCategory(ArrayList<String> cat){
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, cat);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(categoryAdapter);
+    }
+
+    public void popSpinnerPeriod(ArrayList<String> per){
+        ArrayAdapter<String> periodAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, per);
+        periodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPeriod.setAdapter(periodAdapter);
+    }
 }
