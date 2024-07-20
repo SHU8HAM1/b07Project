@@ -65,17 +65,15 @@ public class AddItemFragment extends Fragment{
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    public void popSpinnerCategory(ArrayList<String> cat){
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, cat);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(categoryAdapter);
-    }
-
-    public void popSpinnerPeriod(ArrayList<String> per){
-        ArrayAdapter<String> periodAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, per);
-        periodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPeriod.setAdapter(periodAdapter);
+    public void popSpinner(String path, ArrayList<String> list){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if(path.equals("Categories")){
+            spinnerCategory.setAdapter(adapter);
+        }
+        if (path.equals("Periods")){
+            spinnerPeriod.setAdapter(adapter);
+        }
     }
 }

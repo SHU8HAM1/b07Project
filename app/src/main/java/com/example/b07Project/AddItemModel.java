@@ -28,7 +28,7 @@ public class AddItemModel{
         });
     }
 
-    public ArrayList<String> getDataList(String path){
+    public void getDataList(String path){
         ArrayList<String> list = new ArrayList<>();
         DatabaseReference ref = db.getReference(path);
 
@@ -39,7 +39,7 @@ public class AddItemModel{
                 for(DataSnapshot child: snapshot.getChildren()){
                     list.add(child.getKey());
                 }
-                presenter.getList(path, list);
+                presenter.popList(path, list);
             }
 
             @Override
@@ -47,7 +47,7 @@ public class AddItemModel{
                 presenter.setDataBaseError(error.getMessage());
             }
         });
-        return list;
+        //return list;
     }
 
     //Need a method to get arraylist of category and period

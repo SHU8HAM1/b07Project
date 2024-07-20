@@ -17,11 +17,13 @@ public class AddItemPresenter{
 
     public void checkItem(String lotNum, String name, String description, String category, String period){
         if (lotNum.isEmpty() || name.isEmpty() || description.isEmpty() || category.isEmpty() || period.isEmpty()) {
-            Toast.makeText(view.getContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show();
+            view.displayMessage("Please fill out all fields");
             return;
         }
-        Item newItem = new Item(category, description, name, period);
         lotNum = String.valueOf(Integer.parseInt(lotNum));
+
+        Item newItem = new Item(category, description, name, period);
+
         model.addItem(lotNum, newItem);
     }
 
@@ -31,15 +33,7 @@ public class AddItemPresenter{
     public void setDataBaseError(String msg){
         view.displayMessage("Database error: " + msg);
     }
-    public void getList(String path, ArrayList<String> list){
-        if(path.equals("Categories")){
-            view.popSpinnerCategory(list);
-        }
-        if(path.equals("Periods")){
-            view.popSpinnerPeriod(list);
-        }
-    }
-    public void getPeriodList(ArrayList<String> per){
-        view.popSpinnerPeriod(per);
+    public void popList(String path, ArrayList<String> list) {
+        view.popSpinner(path, list);
     }
 }
