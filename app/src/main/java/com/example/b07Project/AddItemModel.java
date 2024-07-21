@@ -1,5 +1,7 @@
 package com.example.b07Project;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +29,11 @@ public class AddItemModel{
 
     public void addItem(Item newItem){
 
-        itemRef.child(String.valueOf(newItem.lotNumber)).setValue(newItem).addOnCompleteListener(task -> {
-            updatePathValue("Categories", newItem.category);
-            updatePathValue("Periods", newItem.period);
-            presenter.setAdded(task.isSuccessful());
+        itemRef.child(String.valueOf(newItem.lotNumber)).setValue(newItem).addOnCompleteListener(
+                task -> {
+                    updatePathValue("Categories", newItem.category);
+                    updatePathValue("Periods", newItem.period);
+                    presenter.setAdded(task.isSuccessful());
         });
     }
 
@@ -63,6 +66,27 @@ public class AddItemModel{
                     list.add(child.getKey());
                 }
                 presenter.popList(path, list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                presenter.setDataBaseError(error.getMessage());
+            }
+        });
+    }
+
+    public void lotNumExist(String lotNumString, String name, String description, String category,
+                            String period, Uri uri) {
+        itemRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean exist = false;
+                for(DataSnapshot child: snapshot.getChildren()){
+                    if(child.getKey().equals(lotNumString)){
+                        exist = true;
+                    }
+                }
+                presenter.addItem(exist, lotNumString, name, description, category, period, uri);
             }
 
             @Override
