@@ -8,4 +8,8 @@
     <string name="picture_video">Picture/Video</string>
     <string name="upload_file">Upload File Here</string>
     <string name="submit">Submit</string>
+    <string name="admin_button">Admin</string>
+    <string name="login">Login:</string>
+    <string name="password">Password:</string>
+
 </resources>
