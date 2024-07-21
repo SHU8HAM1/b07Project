@@ -2,12 +2,10 @@ package com.example.b07Project;
 
 import androidx.annotation.NonNull;
 
-import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -16,7 +14,6 @@ public class AddItemModel{
     protected AddItemPresenter presenter;
     private FirebaseDatabase db;
     private DatabaseReference itemRef;
-    private static final String TAG = "AddItemModel";
 
     private DatabaseReference getRef(String path){
         return db.getReference().child(path);
