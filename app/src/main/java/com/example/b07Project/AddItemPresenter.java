@@ -59,7 +59,7 @@ public class AddItemPresenter{
             });
         }
         else{
-            model.addItem(new Item(lotNum, category, description, name, period, null));
+            model.addItem(new Item(lotNum, category, description, name, period, ""));
         }
     }
 
