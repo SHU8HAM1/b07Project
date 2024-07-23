@@ -23,10 +23,10 @@ import com.example.b07project.R;
 import java.util.ArrayList;
 
 public class AddItemFragment extends Fragment{
-    protected EditText editLotNumber, editName, editDescription;
-    protected Spinner spinnerCategory, spinnerPeriod;
-    protected Button buttonUpload, buttonSubmit;
-    protected AddItemPresenter presenter;
+    private EditText editLotNumber, editName, editDescription;
+    private Spinner spinnerCategory, spinnerPeriod;
+    private Button buttonUpload, buttonSubmit;
+    private AddItemPresenter presenter;
 
     private Uri uri;
     private ActivityResultLauncher<Intent> launcher;

@@ -9,21 +9,31 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class AddItemModel{
-    protected AddItemPresenter presenter;
+    private AddItemPresenter presenter;
     private FirebaseDatabase db;
     private DatabaseReference itemRef;
+    private StorageReference storageRef;
+    private FirebaseStorage sr;
 
-    private DatabaseReference getRef(String path){
+    private DatabaseReference getDbRef(String path){
         return db.getReference().child(path);
+    }
+
+    private StorageReference getSrRef(String path){
+        return sr.getReference().child(path);
     }
 
     public AddItemModel(AddItemPresenter presenter){
         db = FirebaseDatabase.getInstance("https://b07project-d4d14-default-rtdb.firebaseio.com/");
-        itemRef = getRef("Items");
+        sr = FirebaseStorage.getInstance("gs://b07project-d4d14.appspot.com");
+        storageRef = getSrRef("uploads");
+        itemRef = getDbRef("Items");
         this.presenter = presenter;
     }
 
@@ -38,7 +48,7 @@ public class AddItemModel{
     }
 
     private void updatePathValue(String path, String subpath){
-        DatabaseReference ref = getRef(path).child(subpath);
+        DatabaseReference ref = getDbRef(path).child(subpath);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,14 +61,14 @@ public class AddItemModel{
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
-                presenter.setDataBaseError(error.getMessage());
+                presenter.setError("Database error: " + error.getMessage());
             }
         });
     }
 
     public void getDataList(String path){
         ArrayList<String> list = new ArrayList<>();
-        getRef(path).addValueEventListener(new ValueEventListener() {
+        getDbRef(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
@@ -70,7 +80,7 @@ public class AddItemModel{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                presenter.setDataBaseError(error.getMessage());
+                presenter.setError("Database error: " + error.getMessage());
             }
         });
     }
@@ -91,8 +101,36 @@ public class AddItemModel{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                presenter.setDataBaseError(error.getMessage());
+                presenter.setError("Database error: " + error.getMessage());
             }
         });
+    }
+
+    public void addItemWithURI(int lotNum, String name, String description, String category,
+                               String period, Uri uri){
+        if (uri != null){
+            StorageReference fileRef = storageRef.child(
+                    System.currentTimeMillis() + "." + presenter.getFileExt(uri));
+            fileRef.putFile(uri).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    fileRef.getDownloadUrl().addOnCompleteListener(urlTask -> {
+                        if (urlTask.isSuccessful()){
+                            String uriString = task.getResult().toString();
+                            presenter.setUploaded();
+                            addItem(new Item(lotNum, category, description, name, period,
+                                    uriString));
+                        }
+                        else{
+                            presenter.setError("Failed to get download URL" +
+                                    urlTask.getException().getMessage());
+                        }
+                    });
+                }
+                else{
+                    presenter.setError("Upload Failed: " + task.getException().getMessage());
+                }
+            });
+        }
+        addItem(new Item(lotNum, category, description, name, period, ""));
     }
 }
