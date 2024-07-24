@@ -13,8 +13,9 @@
         android:theme="@style/Theme.B07Project"
         tools:targetApi="31">
         <activity
-            android:name="com.example.b07Project.TestActivity"
+            android:name=".MainActivity"
             android:exported="false" />
+
         <activity
             android:name="com.example.b07Project.MainActivity"
             android:exported="true">
