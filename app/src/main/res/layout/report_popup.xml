@@ -1,24 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="400dp"
+    android:layout_height="600dp"
     android:rotationX="2"
-    android:visibility="visible">
+    android:translationX="5dp"
+    android:translationY="0dp"
+    android:visibility="visible"
+    tools:layout_editor_absoluteX="5dp"
+    tools:layout_editor_absoluteY="89dp"
+    tools:visibility="visible">
 
-    <Spinner
-        android:id="@+id/report_selector"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154"
-        tools:visibility="visible" />
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="600dp"
+        tools:layout_editor_absoluteX="-50dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="51dp"
+            android:layout_height="46dp"
+            android:translationX="260dp"
+            android:translationY="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.936"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.045"
+            app:srcCompat="@android:drawable/ic_delete"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/report_query"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="text"
+            android:text="Keywords"
+            android:translationX="40dp"
+            android:translationY="210dp"
+            app:layout_constraintBottom_toTopOf="@+id/noDesc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.286"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.872" />
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:translationX="70dp"
+            android:translationY="150dp"
+            app:layout_constraintBottom_toTopOf="@+id/report_query"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+            app:layout_constraintVertical_bias="0.727" />
+
+        <Button
+            android:id="@+id/noDesc"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="136dp"
+            android:text="Without Description"
+            android:translationX="50dp"
+            android:translationY="230dp"
+            app:layout_constraintBottom_toTopOf="@+id/Desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.891" />
+
+        <Button
+            android:id="@+id/Desc"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="With Description"
+            android:translationX="70dp"
+            android:translationY="300dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Generate Pdf Report"
+            android:textFontWeight="@integer/material_motion_duration_medium_1"
+            android:textSize="30dp"
+            android:translationX="80dp"
+            android:translationY="100dp" />
+    </RelativeLayout>
+    >
 </androidx.constraintlayout.widget.ConstraintLayout>
