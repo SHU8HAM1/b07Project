@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">B07 Project</string>
-    <string name = "title">"Toronto Asian Art Museum Collection Management" </string>
-    <string name = "admin"> Admin </string>
-    <string name = "select"> Select </string>
+    <string name="title">"Toronto Asian Art Museum Collection Management" </string>
+    <string name="admin"> Admin </string>
+    <string name="select"> Select </string>
     <string name="lot_number">Lot Number</string>
     <string name="item_name">Name</string>
     <string name="category">Category</string>
@@ -12,10 +12,10 @@
     <string name="upload_file">Upload File Here</string>
     <string name="submit">Submit</string>
     <string name="huh">item_name</string>
-    <string name = "prev_page"> Prev. page </string>
-    <string name = "next_page"> Next page </string>
-    <string name = "view"> View </string>
-    <string name = "search"> Search </string>
+    <string name="prev_page"> Prev. page </string>
+    <string name="next_page"> Next page </string>
+    <string name="view"> View </string>
+    <string name="search"> Search </string>
     <string name="example_yellow_vase">Example: Yellow-Glazed Flat Vase</string>
     <!--
     We need a way to fetch categories and periods from the database
