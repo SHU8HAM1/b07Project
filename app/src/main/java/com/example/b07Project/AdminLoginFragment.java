@@ -58,7 +58,7 @@ public class AdminLoginFragment extends Fragment {
                 }
             });
 
-            return null;
+            return view;
         }
         return null;
 
