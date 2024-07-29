@@ -21,12 +21,21 @@ public class Item {
     }
 
     public Item(){
-        this.name = "Holkdsjfjkldasjklfjkljaa";
-        this.description = "lorem ksadj dklsjf lkdsjfkl skdfjlksdjf kf dsklajfj afkljdsj fkdj fkf alkj afskljipsum";
+        this.name = "Holkdsjfjkafsdfasdfsdfsldasjklfjfdsadfafgsdfgsdgskljaa";
+        this.description = "lorem ksadj dklsjfdsalkj" +
+                "afskjdfhjkhjfksa" +
+                "afskjfklj fjas'fdjl sadkf j'asl dfjka jska" +
+                " asfdj ajdsfk kdlsajf ldskfj kdslfj fslakj fs" +
+                " asj fklasjdlk jf asfdj kdjasf k faskj fdsj" +
+                "alf afjklas kafsdj klaksflj kasjfd k " +
+                "afj ajkjfkdlsaj fkljlas. jfasdl f" +
+                "f aslkjflkasjlfjla fsddsjkldsjfkljdsfajkf" +
+                "f asdkjfdaskljfklsdj fkljd fkdjs ksjdf ksljd" +
+                "f dskljfklsjdfkljdskfl sdklfj lkdsjf dskjdsf";
         this.lot_num = 2;
         this.category = "huhuhuhuh";
         this.period = "Shanghai";
-        this.picture = "https://imgur.com/tGbaZCY";
+        this.picture = "https://firebasestorage.googleapis.com/v0/b/b07project-d4d14.appspot.com/o/uploads%2F1721770737737.jpg?alt=media&token=3766bb66-c172-4a13-8e59-ca803407dfec";
     }
 
     public String getPicture() {

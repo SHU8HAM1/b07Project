@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
+    android:layout_width="350dp"
     android:layout_height="600dp"
     android:rotationX="2"
     android:translationX="5dp"
@@ -14,25 +14,11 @@
     tools:visibility="visible">
 
     <RelativeLayout
-        android:layout_width="450dp"
+        android:layout_width="350dp"
         android:layout_height="600dp"
-        tools:layout_editor_absoluteX="-50dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="51dp"
-            android:layout_height="46dp"
-            android:translationX="260dp"
-            android:translationY="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.936"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.045"
-            app:srcCompat="@android:drawable/ic_delete"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/report_query"
@@ -96,8 +82,7 @@
             android:text="Generate Pdf Report"
             android:textFontWeight="@integer/material_motion_duration_medium_1"
             android:textSize="30dp"
-            android:translationX="80dp"
+            android:translationX="70dp"
             android:translationY="100dp" />
     </RelativeLayout>
-    >
 </androidx.constraintlayout.widget.ConstraintLayout>
