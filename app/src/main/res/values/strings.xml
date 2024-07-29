@@ -8,8 +8,6 @@
     <string name="picture_video">Picture/Video</string>
     <string name="upload_file">Upload File Here</string>
     <string name="submit">Submit</string>
-    <string name="huh">item_name</string>
-    <string name="example_yellow_vase">Example: Yellow-Glazed Flat Vase</string>
     <!--
     We need a way to fetch categories and periods from the database
     Note that this is only a temporary way to get categories and periods
