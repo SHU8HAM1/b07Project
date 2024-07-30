@@ -44,7 +44,7 @@ public class AddItemModel{
                     updatePathValue("Categories", newItem.category);
                     updatePathValue("Periods", newItem.period);
                     presenter.setAdded(task.isSuccessful());
-        });
+                });
     }
 
     private void updatePathValue(String path, String subpath){
@@ -71,6 +71,7 @@ public class AddItemModel{
         getDbRef(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 list.clear();
                 for(DataSnapshot child: snapshot.getChildren()){
                     list.add(child.getKey());
@@ -115,7 +116,7 @@ public class AddItemModel{
                 if(task.isSuccessful()){
                     fileRef.getDownloadUrl().addOnCompleteListener(urlTask -> {
                         if (urlTask.isSuccessful()){
-                            String uriString = task.getResult().toString();
+                            String uriString = urlTask.getResult().toString();
                             presenter.setUploaded();
                             addItem(new Item(lotNum, category, description, name, period,
                                     uriString));
