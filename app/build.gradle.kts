@@ -48,11 +48,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.11.0")
     implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     annotationProcessor(libs.compiler)
-    try {
-        annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
-    } catch (e: Exception) {
-        TODO("Not yet implemented")
-    }
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("androidx.activity:activity-ktx:1.8.0") // Check for the latest version
     implementation ("androidx.fragment:fragment-ktx:1.6.0")

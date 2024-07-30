@@ -21,7 +21,7 @@ public class Item {
     }
 
     public Item(){
-        this.name = "Holkdsjfjkafsdfasdfsdfsldasjklfjfdsadfafgsdfgsdgskljaa";
+        this.name = "Hosdgsgsdgdea";
         this.description = "lorem ksadj dklsjfdsalkj" +
                 "afskjdfhjkhjfksa" +
                 "afskjfklj fjas'fdjl sadkf j'asl dfjka jska" +

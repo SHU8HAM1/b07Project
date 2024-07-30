@@ -191,17 +191,18 @@ public class ReportFragment extends DialogFragment{
         PdfDocument pdfDocument = new PdfDocument();
         Paint paint = new Paint();
 
+
+
         int currentPageNumber = 1;
-        int startY = margin + rowHeight + 20;
 
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, currentPageNumber).create();
         PdfDocument.Page page = pdfDocument.startPage(pageInfo);
         Canvas canvas = page.getCanvas();
 
-        // Draw table header
-        drawRow(canvas, paint, header, startY - rowHeight, columnWidths, margin, true);
+        int currentHeight = 0;
 
-        int currentRowNumber = 0;
+        currentHeight = 10 + drawRow(canvas, paint, header, 10, true, getContext());
+
         for (int i = 0; i < itemList.size(); i++) {
 
             row[0] = "" + itemList.get(i).getLot_num();
@@ -209,30 +210,27 @@ public class ReportFragment extends DialogFragment{
             row[2] = itemList.get(i).getCategory();
             row[3] = itemList.get(i).getPeriod();
 
-            if (currentRowNumber == ROWS_PER_PAGE) {
+            if (currentHeight >= (pageHeight - 100)) {
                 pdfDocument.finishPage(page);
                 currentPageNumber++;
                 pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, currentPageNumber).create();
                 page = pdfDocument.startPage(pageInfo);
                 canvas = page.getCanvas();
 
-                // Draw table header on new page
+                currentHeight = 10 + drawRow(canvas, paint, header, 10,true, getContext());
 
-                drawRow(canvas, paint, header, startY - rowHeight, columnWidths, margin, true);
-
-                startY = margin + rowHeight;
-                currentRowNumber = 0;
             }
 
-            drawRow(canvas, paint, row, startY, columnWidths, margin, false);
-            startY += rowHeight;
-            currentRowNumber++;
+            currentHeight += drawRow(canvas, paint, row, currentHeight, false, getContext());
         }
 
         pdfDocument.finishPage(page);
 
         File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String fileName = "exampleTable.pdf";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        String timestamp = dateFormat.format(new Date());
+
+        String fileName = "No_Description_" + timestamp + ".pdf";
         File filePath = new File(downloadsDir, fileName);
 
 
@@ -242,6 +240,7 @@ public class ReportFragment extends DialogFragment{
             pdfDocument.writeTo(fos);
             pdfDocument.close();
             fos.close();
+            displayMessage("Report Generated: " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
             // Error occurred while converting to PDF
@@ -251,111 +250,69 @@ public class ReportFragment extends DialogFragment{
 
 
 
-    private static void drawRow(Canvas canvas, Paint paint, String[] row, int y, int[] width,
-                                int margin, boolean head) {
-        paint.setTextSize(16);
-        paint.setFakeBoldText(head);
+    private static int drawRow(Canvas canvas, Paint paint, String[] row, int y, boolean head, Context context) {
+        TableRow tableRow = new TableRow(context);
 
-        int x = margin + 15;
-        for (int i = 0; i < row.length; i++) {
-            int columnWidth = width[i];
-            canvas.drawText(row[i], x, y, paint);
-            x += columnWidth + margin;
-            canvas.drawLine (x - margin/2, 0, x - margin/2, 800, paint);
+        TextView col1 = new TextView(context);
+        TextView col2 = new TextView(context);
+        TextView col3 = new TextView(context);
+        TextView col4 = new TextView(context);
+
+        if(head) {
+            tableRow.setBackgroundColor(Color.GRAY);
         }
-        canvas.drawLine (0, y + 5,595, y + 5, paint);
+
+        col1.setWidth(80);
+        col2.setWidth(160);
+        col3.setWidth(160);
+        col4.setWidth(160);
+
+        col1.setText(row[0]);
+        col2.setText(row[1]);
+        col3.setText(row[2]);
+        col4.setText(row[3]);
+
+        col1.setTextSize(9);
+        col2.setTextSize(9);
+        col3.setTextSize(9);
+        col4.setTextSize(9);
+
+
+        TableRow.LayoutParams params1 = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1f);
+        TableRow.LayoutParams params2 = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 2f);
+
+        params1.setMargins(5, 5, 5, 5);
+        params2.setMargins(5, 5, 5, 5);
+
+        col1.setLayoutParams(params1);
+        col2.setLayoutParams(params2);
+        col3.setLayoutParams(params2);
+        col4.setLayoutParams(params2);
+
+        col1.setPadding(5, 5, 5, 5);
+        col2.setPadding(5, 5, 5, 5);
+        col3.setPadding(5, 5, 5, 5);
+        col4.setPadding(5, 5, 5, 5);
+
+        tableRow.addView(col1);
+        tableRow.addView(col2);
+        tableRow.addView(col3);
+        tableRow.addView(col4);
+
+        tableRow.measure(590, View.MeasureSpec.UNSPECIFIED);
+        tableRow.layout(0, 0, 590, tableRow.getMeasuredHeight());
+
+        canvas.save();
+        canvas.translate(10, y);
+        tableRow.draw(canvas);
+        canvas.restore();
+
+        return tableRow.getMeasuredHeight();
     }
 
 
-    private void compilePdf(){
-        PdfDocument document = new PdfDocument();
-        URL url;
-
-        //PdfDocument.Page page = document.startPage(pageInfo);
-
-        View picView = LayoutInflater.from(getContext()).inflate(R.layout.pdf_pic, null);
-        DisplayMetrics dm = new DisplayMetrics();
-
-        dm = getResources().getDisplayMetrics();
-
-        picView.measure(View.MeasureSpec.makeMeasureSpec(dm.widthPixels, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(dm.heightPixels, View.MeasureSpec.EXACTLY));
-
-        picView.layout(0, 0, dm.widthPixels, dm.heightPixels);
-
-        int viewWidth = 1200;
-        int viewHeight = 800;
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(viewWidth, viewHeight, 1).create();
-
-        // Start a new page
-        PdfDocument.Page page = document.startPage(pageInfo);
-
-        // Get the Canvas object to draw on the page
-        Canvas canvas = page.getCanvas();
-
-        // Create a Paint object for styling the view
-        Paint paint = new Paint();
-
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(50);
-        paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD_ITALIC));
-
-        String text = "Report: Pictures and Description";
-        float x = 300;
-        float y = 200;
-
-        canvas.drawText(text, x, y, paint);
-
-        // Finish the page
-        document.finishPage(page);
 
 
-        ArrayList<Item> itemList = new ArrayList<Item>();
-        Item item = new Item();
-        itemList.add(item);
-
-        int len = itemList.size();
-
-        TextView description = picView.findViewById(R.id.body);
-        TextView title = picView.findViewById(R.id.title_view);
-        ImageView picture = picView.findViewById(R.id.picture);
-
-        paint.setColor(Color.WHITE);
-
-
-        for(int i = 0; i < len; i++) {
-            pageInfo = new PdfDocument.PageInfo.Builder(viewWidth, viewHeight, 2).create();
-            page = document.startPage(pageInfo);
-            canvas = page.getCanvas();
-            description.setText(itemList.get(0).description);
-            title.setText(itemList.get(0).name);
-
-            picView.draw(canvas);
-            document.finishPage(page);
-        }
-
-
-        // Specify the path and filename of the output PDF file
-        File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String timestamp = dateFormat.format(new Date());
-
-        String fileName = "Description_" + timestamp + ".pdf";
-        File filePath = new File(downloadsDir, fileName);
-
-
-        try {
-            // Save the document to a file
-            FileOutputStream fos = new FileOutputStream(filePath);
-            document.writeTo(fos);
-            document.close();
-            fos.close();
-            displayMessage("File name: " + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Error occurred while converting to PDF
-        }
-    }
 
 
 
@@ -372,12 +329,11 @@ public class ReportFragment extends DialogFragment{
         public void run() {
             PdfDocument pdfDocument = new PdfDocument();
 
+
             TextView description = new TextView(context);
             description.setHeight(750);
             description.setWidth(600);
-            //TextViewCompat.setAutoSizeTextTypeWithDefaults(description, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);;
             description.setTextColor(Color.BLACK);
-
 
             int descriptionSize = 18;
             int nameSize = 24;
@@ -402,7 +358,7 @@ public class ReportFragment extends DialogFragment{
                 name.setText(item.getName());
 
                 descriptionSize = max(20 - item.getDescription().length()/120, 2);
-                nameSize = max(24 - item.getDescription().length()/40, 8);
+                nameSize = max(28 - item.getDescription().length()/40, 12);
 
                 description.setTextSize(descriptionSize);
                 name.setTextSize(nameSize);
