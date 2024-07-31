@@ -13,12 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.b07project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,38 +24,41 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AdminLoginFragment extends Fragment {
 
-    protected Button buttonLogin, buttonRegister;
-    protected EditText editTextUsername, editTextPassword;
-    protected TextView username, password; //username = email
+    private Button buttonLogin, buttonRegister;
+    private EditText editTextEmail, editTextPassword;
+    private TextView email, password; // NOTE: email = email
     private FirebaseAuth mAuth;
-    private boolean isAdmin;
+    public static boolean isAdmin;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             View view = inflater.inflate(R.layout.fragment_admin_login, container, false);
-            editTextUsername = view.findViewById(R.id.editTextUsername);
+            editTextEmail = view.findViewById(R.id.editTextEmail);
             editTextPassword = view.findViewById(R.id.editTextPassword);
             buttonLogin = view.findViewById(R.id.buttonLogin);
             buttonRegister = view.findViewById(R.id.buttonRegister);
-            username = view.findViewById(R.id.username);
+            email = view.findViewById(R.id.email);
             password = view.findViewById(R.id.password);
             mAuth = FirebaseAuth.getInstance();
             //to sign out user, use: FirebaseAuth.getInstance().signOut();
-
+            buttonRegister.setVisibility(View.GONE);
             buttonLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     verify();
                 }
             });
+            /* //code for register button, but its not a requirement
             buttonRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     createAccount();
                 }
-            });
-
+            });*/
+            if (isAdmin){
+                view.callOnClick();
+            }
             return view;
         }
         return null;
@@ -65,7 +66,7 @@ public class AdminLoginFragment extends Fragment {
     }
     private void verify(){
 
-        String email = editTextUsername.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         if ((email == null) && (email.isEmpty()) || (password ==null && password.isEmpty()) ){
             return; // email or password is invalid
@@ -76,18 +77,20 @@ public class AdminLoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //sign in was successful, what next?
+                                isAdmin = true;
+                                //sign in was successful
                                 FirebaseUser user = mAuth.getCurrentUser();
+
                                 Log.d("ADMIN", "Successful");
 
                             } else {
+                                isAdmin = false;
                                 Log.d("ADMIN", "failed");
 
                             }
                         }
                     });
         }
-
     }
     @Override
     public void onStart() {
@@ -99,9 +102,10 @@ public class AdminLoginFragment extends Fragment {
         }
     }
 
+    /* //code for creating account through firebase auth
     protected void createAccount() {
         if (!isAdmin) {
-            String email = editTextUsername.getText().toString().trim();
+            String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
             if ((email == null) && (email.isEmpty()) || (password == null && password.isEmpty())) {
                 return; // email or password is invalid
@@ -111,17 +115,18 @@ public class AdminLoginFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+
                                     //sign in was successful, what next?
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Log.d("ADMIN", "Successful");
                                 } else {
+                                    isAdmin = false;
                                     Log.d("ADMIN", "failed");
                                 }
                             }
                         });
             }
-
         }
-    }
+    }*/
 
 }

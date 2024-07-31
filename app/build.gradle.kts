@@ -39,6 +39,7 @@ android {
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-auth")
+    testImplementation("org.mockito:mockito-core:3.")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
