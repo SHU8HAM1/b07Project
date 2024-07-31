@@ -2,10 +2,12 @@ package com.example.b07Project;
 
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class AdminFragmentPresenter {
 
-    private AdminFragmentView view;
-    private AdminFragmentModel model;
+    public AdminFragmentView view;
+    public AdminFragmentModel model;
 
     public AdminFragmentPresenter(AdminFragmentView view, AdminFragmentModel model){
         this.view = view;
@@ -18,13 +20,22 @@ public class AdminFragmentPresenter {
             view.showLoginFailure();
             return;
         }
-        model.verify(email, password);
+        model.verify(email, password, new AuthenticationCallback() {
+            @Override
+            public void onSuccess() {
+                view.showLoginSuccess();
+                view.back();
 
-        if (AdminFragmentModel.isAdmin){
-            view.showLoginSuccess();
-            return;
-        }
-        view.showLoginFailure();
+            }
+
+            @Override
+            public void onFail() {
+                view.showLoginFailure();
+            }
+        });
+
+
     }
+
 
 }

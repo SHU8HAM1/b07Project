@@ -25,30 +25,30 @@ public class AdminFragmentModel {
     FirebaseAuth mAuth;
 
     public static boolean isAdmin;
-    public AdminFragmentModel(FirebaseAuth mAuth){
-        this.mAuth = mAuth;
+    public AdminFragmentModel(){
+        this.mAuth =  FirebaseAuth.getInstance();
+        isAdmin = false;
     }
 
-    public void verify(EditText editTextEmail, EditText editTextPassword){
+    public void verify(EditText editTextEmail, EditText editTextPassword, AuthenticationCallback call){
 
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        if (email == null || email.toString().isEmpty() || password == null || password.toString().isEmpty()){
-            return; // email or password is invalid
-        }
-        else {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 isAdmin = true;
+                                call.onSuccess();
+                                return;
                             } else {
                                 isAdmin = false;
+                                call.onFail();
+                                return;
                             }
                         }
                     });
-        }
     }
 
 

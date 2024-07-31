@@ -20,46 +20,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //if (savedInstanceState == null){AdminLoginFragment.isAdmin = false;}
+
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         Button buttonAdmin = findViewById(R.id.buttonAdmin);
         Button buttonBack = findViewById(R.id.buttonBack);
+
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AdminFragmentModel.isAdmin = false;
                 back(v);
             }
         });
-        if (!AdminLoginFragment.isAdmin){
+        if (!AdminFragmentModel.isAdmin){
+            AdminFragmentView adminView = new AdminFragmentView();
+            AdminFragmentModel model = new AdminFragmentModel();
+            AdminFragmentPresenter presenter = new AdminFragmentPresenter(adminView, model);
+            adminView.presenter = presenter;
             buttonAdmin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment adminFragment = new AdminLoginFragment();
+                    //Fragment adminFragment = new AdminLoginFragment();
                     fragmentManager.beginTransaction()
-                            .add(android.R.id.content, adminFragment, "adminFragment")
+                            .add(android.R.id.content, presenter.view, "adminFragment")
                             .setReorderingAllowed(true)
                             .addToBackStack(null)
                             .commit();
                 }
             });
         }
-            /*
-        if (AdminLoginFragment.isAdmin){
-            //buttonAdmin.setVisibility(View.GONE);
-            Fragment fragment = fragmentManager.findFragmentByTag("adminFragment");
-            if (fragment != null) {
-                fragmentManager.beginTransaction()
-                    .remove(fragment)
-                    .commit();
-            }
-        }*/
+
 
     }
     public void back(View view) {
 
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
-        //intent.putExtra("lotNumber", inputLotNum.getText().toString());
         startActivity(intent);
     }
 

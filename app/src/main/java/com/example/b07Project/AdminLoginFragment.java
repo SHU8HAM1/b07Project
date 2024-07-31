@@ -49,16 +49,8 @@ public class AdminLoginFragment extends Fragment {
                     verify();
                 }
             });
-            /* //code for register button, but its not a requirement
-            buttonRegister.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    createAccount();
-                }
-            });*/
-            if (isAdmin){
-                view.callOnClick();
-            }
+
+
             return view;
         }
         return null;
@@ -102,31 +94,6 @@ public class AdminLoginFragment extends Fragment {
         }
     }
 
-    /* //code for creating account through firebase auth
-    protected void createAccount() {
-        if (!isAdmin) {
-            String email = editTextEmail.getText().toString().trim();
-            String password = editTextPassword.getText().toString().trim();
-            if ((email == null) && (email.isEmpty()) || (password == null && password.isEmpty())) {
-                return; // email or password is invalid
-            } else {
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
 
-                                    //sign in was successful, what next?
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Log.d("ADMIN", "Successful");
-                                } else {
-                                    isAdmin = false;
-                                    Log.d("ADMIN", "failed");
-                                }
-                            }
-                        });
-            }
-        }
-    }*/
 
 }

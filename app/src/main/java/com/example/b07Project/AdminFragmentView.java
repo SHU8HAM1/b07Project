@@ -26,7 +26,10 @@ public class AdminFragmentView extends Fragment {
     private Button buttonLogin, buttonRegister;
     private EditText editTextEmail, editTextPassword;
     private TextView email, password;
-
+    public AdminFragmentPresenter presenter;
+    public AdminFragmentView(){
+        presenter = null;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,13 +48,13 @@ public class AdminFragmentView extends Fragment {
                 @Override
                 public void onClick(View v) {
 
+                    presenter.onClickLogin(editTextEmail, editTextPassword);
+
                 }
             });
-
             return view;
         }
         return null;
-
     }
 
     public void showLoginSuccess() {
@@ -61,6 +64,11 @@ public class AdminFragmentView extends Fragment {
     public void showLoginFailure() {
         Log.d("ADMIN", "Failed");
     }
-
+    public void back() {
+        if (getActivity() != null) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
+    }
 
 }
