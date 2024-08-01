@@ -1,29 +1,31 @@
 package com.example.b07Project;
 
 public class Item {
-    public String category;
-    public String description;
-    public int lotNumber;
-    public String name;
-    public String period;
+    private String category;
+    private String description;
+    private int lotNumber;
+    private String name;
+    private String period;
+    private String uri;
     public Item() {
         // Default constructor
     }
 
-    public Item(String category, String desc, int lotNum, String name, String period) {
-        this.lotNumber = lotNum;
+    public Item(String category, String desc, int lotNumber, String name, String period, String uri) {
+        this.lotNumber = lotNumber;
         this.name = name;
         this.category = category;
         this.period = period;
         this.description = desc;
+        this.uri = uri;
     }
 
-    public int getLotNum() {
+    public int getLotNumber() {
         return lotNumber;
     }
 
-    public void setLotNum(int lotNum) {
-        this.lotNumber = lotNum;
+    public void setLotNumber(int lotNumber) {
+        this.lotNumber = lotNumber;
     }
 
     public String getName() {
@@ -57,4 +59,8 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getUri() {return this.uri;}
+
+    public void setUri(String url) { this.uri = url;}
 }

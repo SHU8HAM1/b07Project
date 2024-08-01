@@ -43,4 +43,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation (libs.picasso)
+    implementation ("androidx.activity:activity-ktx:1.8.0")
+    implementation(libs.firebase.ui.storage)
+
 }
+//task("testClasses")
