@@ -31,7 +31,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/name"
-                app:layout_constraintHorizontal_chainStyle="spread" />
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight= "1" />
 
             <TextView
                 android:id="@+id/name"
@@ -41,10 +42,15 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:fontFamily="roboto"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/lotNum"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_chainStyle="spread" />
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight= "3"
+                app:layout_constraintBottom_toTopOf="@id/imageView2"
+                android:layout_marginBottom="8dp" />
 
             <!-- CheckBox, ImageView, Category, Period and Description -->
 
@@ -56,7 +62,7 @@
                 android:contentDescription="@string/picture_video"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lotNum"
+                app:layout_constraintTop_toBottomOf="@id/name"
                 />
 
             <!-- Category and Period beside each other -->
