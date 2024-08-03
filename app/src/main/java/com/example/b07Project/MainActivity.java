@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 back(v);
             }
         });
-        //if (!AdminFragmentModel.isAdmin){
+        if (!AdminFragmentModel.isAdmin){
             AdminFragmentView adminView = new AdminFragmentView();
             AdminFragmentModel model = new AdminFragmentModel();
             AdminFragmentPresenter presenter = new AdminFragmentPresenter(adminView, model);
@@ -42,15 +42,16 @@ public class MainActivity extends AppCompatActivity {
             buttonAdmin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Fragment adminFragment = new AdminLoginFragment();
+
                     fragmentManager.beginTransaction()
                             .add(android.R.id.content, presenter.view, "adminFragment")
                             .setReorderingAllowed(true)
                             .addToBackStack(null)
                             .commit();
+                    buttonAdmin.setVisibility(View.GONE);
                 }
             });
-        //}
+        }
 
 
     }

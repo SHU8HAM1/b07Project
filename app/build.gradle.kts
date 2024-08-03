@@ -40,7 +40,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.junit.junit)
-    implementation(libs.junit.jupiter)
+
     testImplementation("org.mockito:mockito-core:3.+")
     implementation(libs.appcompat)
     implementation(libs.material)
