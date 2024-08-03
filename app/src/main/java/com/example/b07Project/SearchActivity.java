@@ -8,25 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.b07project.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import android.util.Log;
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    DatabaseReference mDatabase;
+    DatabaseReference db;
 
     private static final String TAG = "SearchActivity";
-
-    List<Item> itemList = new ArrayList<>();
-    List<Item> searchList = new ArrayList<>();
 
     TextView textLotNum;
     TextView textName;
@@ -44,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("Items");
+        db = FirebaseDatabase.getInstance().getReference("Items");
 
         textLotNum = findViewById(R.id.textLotNum);
         inputLotNum = findViewById(R.id.inputLotNum);
@@ -58,45 +47,12 @@ public class SearchActivity extends AppCompatActivity {
         textPeriod = findViewById(R.id.textPeriod);
         inputPeriod = findViewById(R.id.inputPeriod);
 
-        readData();
+        Search.readData(db);
     }
 
 
 
-    public void readData() {
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    itemList.clear();
-
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String lotNumber = snapshot.getKey();
-                        Item item = snapshot.getValue(Item.class);
-                        assert lotNumber != null;
-                        assert item != null;
-                        item.lotNumber = Integer.parseInt(lotNumber);
-                        itemList.add(item);
-                    }
-
-                    printItemList();
-                } catch (Exception e) {
-                    Log.e(TAG, "Database Error.", e);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Error Reading Value", error.toException());
-            }
-        });
-    }
-
-
-
-    public boolean searchItems(View view) {
+    public void searchItems(View view) {
 
         String lotNumberInput = inputLotNum.getText().toString();
         String nameInput = inputName.getText().toString().trim();
@@ -105,113 +61,13 @@ public class SearchActivity extends AppCompatActivity {
 
         if (!lotNumberInput.isEmpty()) {
             int lotNumber = Integer.parseInt(lotNumberInput);
-            searchByLotNumber(mDatabase, lotNumber);
+            Search.searchByLotNumber(db, lotNumber);
         } else {
-            // If lot number is not provided, search by other criteria
-            searchByOtherCriteria(mDatabase, nameInput, categoryInput, periodInput);
-        }
-
-        return !(searchList.isEmpty());
-    }
-
-    private void searchByLotNumber(DatabaseReference mDatabase, int lotNumber) {
-
-        mDatabase.child(String.valueOf(lotNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                searchList.clear(); // Clear the list to avoid duplication
-                Item item = dataSnapshot.getValue(Item.class);
-                if (item != null) {
-                    item.lotNumber = lotNumber;
-                    searchList.add(item);
-                    printSearchList();
-                } else {
-                    Log.w(TAG, "No item found with lot number: " + lotNumber);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Error Reading Value", error.toException());
-            }
-        });
-    }
-
-    private void searchByOtherCriteria(DatabaseReference mDatabase, String name, String category, String period) {
-
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                searchList.clear();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    Item item = snapshot.getValue(Item.class);
-
-                    if (snapshot.getKey() != null) {
-                        assert item != null;
-                        try {
-                            item.lotNumber = parseInt((snapshot.getKey()));
-                        } catch (Exception e) {
-                            Log.w(TAG, "Lot Number is a String." + snapshot.getKey());
-                        }
-
-                    }
-                    if (item != null) {
-                        boolean matches = true;
-
-                        if (name.isEmpty() && category.isEmpty() && period.isEmpty()) {
-                            matches = false;
-                        }
-                        if (!name.isEmpty() && !item.name.equals(name)) {
-                            matches = false;
-                        }
-                        if (!category.isEmpty() && !item.category.equals(category)) {
-                            matches = false;
-                        }
-                        if (!period.isEmpty() && !item.period.equals(period)) {
-                            matches = false;
-                        }
-                        if (matches) {
-                            searchList.add(item);
-                        }
-                    } else {
-                        Log.w(TAG, "Item is null" + snapshot.getKey());
-                    }
-                }
-
-                printSearchList();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "Error Reading Value", error.toException());
-            }
-        });
-
-    }
-
-    private void printSearchList() {
-
-        if (!(searchList.isEmpty())) {
-            for (Item item : searchList) {
-                Log.d(TAG, "(Searched Item) LotNumber: " + item.lotNumber + ", Item name: " + item.name + ", description: " + item.description + ", category: " + item.category + ", period: " + item.period + ", uri: " + item.uri);
-            }
-        } else {
-            Log.d(TAG, "No Items Found with that search");
+            Search.searchByOther(db, nameInput, categoryInput, periodInput);
         }
 
     }
 
-    private void printItemList() {
-
-        for (Item item : itemList) {
-            Log.d(TAG, "LotNumber: " + item.lotNumber + ", Item name: " + item.name + ", description: " + item.description + ", category: " + item.category + ", period: " + item.period + ", uri: " + item.uri);
-        }
-
-    }
 
     public void remove(View view) {
 
