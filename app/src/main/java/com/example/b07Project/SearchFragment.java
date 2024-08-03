@@ -80,11 +80,13 @@ public class SearchFragment extends DialogFragment {
         String categoryInput = inputCategory.getText().toString().trim();
         String periodInput = inputPeriod.getText().toString().trim();
 
+        Search s = new Search();
+
         if (!lotNumberInput.isEmpty()) {
             int lotNumber = Integer.parseInt(lotNumberInput);
-            Search.searchByLotNumber(db, lotNumber, searchList);
+            s.searchByLotNumber(lotNumber, searchList);
         } else {
-            Search.searchByOther(db, nameInput, categoryInput, periodInput, searchList);
+            s.searchByOther(nameInput, categoryInput, periodInput, searchList);
         }
 
     }

@@ -54,7 +54,7 @@ public class Search {
         return itemList;
     }
 
-    static List<Item> searchByLotNumber(DatabaseReference db, int lotNumber, List<Item> searchList) {
+    public List<Item> searchByLotNumber(int lotNumber, List<Item> searchList) {
 
         db.child(String.valueOf(lotNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -79,7 +79,7 @@ public class Search {
         return searchList;
     }
 
-    static List<Item> searchByOther(DatabaseReference db, String name, String category, String period, List<Item> searchList) {
+    public List<Item> searchByOther(String name, String category, String period, List<Item> searchList) {
 
         db.addListenerForSingleValueEvent(new ValueEventListener() {
 
