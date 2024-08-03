@@ -27,7 +27,6 @@ public class AdminFragmentModel {
     public static boolean isAdmin;
     public AdminFragmentModel(){
         this.mAuth =  FirebaseAuth.getInstance();
-        isAdmin = false;
     }
 
     public void verify(String email, String password, AuthenticationCallback call){
@@ -38,11 +37,11 @@ public class AdminFragmentModel {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                isAdmin = true;
+                                AdminFragmentModel.isAdmin = true;
                                 call.onSuccess();
                                 return;
                             } else {
-                                isAdmin = false;
+                                AdminFragmentModel.isAdmin= false;
                                 call.onFail();
                                 return;
                             }
@@ -50,9 +49,7 @@ public class AdminFragmentModel {
                     });
     }
 
-    public void goBack(){
-        AdminFragmentModel.isAdmin = false;
-    }
+
 
 
 }

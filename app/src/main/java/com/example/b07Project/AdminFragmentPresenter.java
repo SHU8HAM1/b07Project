@@ -25,6 +25,7 @@ public class AdminFragmentPresenter {
         model.verify(emailVerify, passwordVerify, new AuthenticationCallback() {
             @Override
             public void onSuccess() {
+
                 view.showLoginSuccess();
                 view.back();
 

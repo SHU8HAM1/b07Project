@@ -42,14 +42,7 @@ public class AdminFragmentView extends Fragment {
             buttonRegister = view.findViewById(R.id.buttonRegister);
             email = view.findViewById(R.id.email);
             password = view.findViewById(R.id.password);
-            OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-                @Override
-                public void handleOnBackPressed() {
-                    presenter.model.goBack();
-                    presenter.view.back();
-                }
-            };
-            requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
             //to sign out user, use: FirebaseAuth.getInstance().signOut();
             buttonRegister.setVisibility(View.GONE);
             buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +67,7 @@ public class AdminFragmentView extends Fragment {
     }
     public void back() {
         if (getActivity() != null) {
+
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
         }
