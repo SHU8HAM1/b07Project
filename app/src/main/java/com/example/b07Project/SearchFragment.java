@@ -56,7 +56,9 @@ public class SearchFragment extends DialogFragment {
         textPeriod = view.findViewById(R.id.textPeriod);
         inputPeriod = view.findViewById(R.id.inputPeriod);
 
-        Search.readData(db, itemList);
+        Search s = new Search();
+
+        s.readData(itemList);
 
         Button searchButton = view.findViewById(R.id.searchButton);
 

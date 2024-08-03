@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import android.util.Log;
 import androidx.annotation.NonNull;
@@ -14,7 +15,13 @@ public class Search {
 
     static String TAG = "SearchActivity";
 
-    public static List<Item> readData(DatabaseReference db, List<Item> itemList) {
+    DatabaseReference db;
+
+    public Search() {
+        db = FirebaseDatabase.getInstance().getReference("Items");
+    }
+
+    public List<Item> readData(List<Item> itemList) {
 
         db.addValueEventListener(new ValueEventListener() {
 
