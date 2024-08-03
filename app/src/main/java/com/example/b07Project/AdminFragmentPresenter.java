@@ -20,7 +20,9 @@ public class AdminFragmentPresenter {
             view.showLoginFailure();
             return;
         }
-        model.verify(email, password, new AuthenticationCallback() {
+        String emailVerify = email.getText().toString().trim();
+        String passwordVerify = password.getText().toString().trim();
+        model.verify(emailVerify, passwordVerify, new AuthenticationCallback() {
             @Override
             public void onSuccess() {
                 view.showLoginSuccess();
@@ -36,6 +38,7 @@ public class AdminFragmentPresenter {
 
 
     }
+
 
 
 }

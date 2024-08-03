@@ -30,10 +30,9 @@ public class AdminFragmentModel {
         isAdmin = false;
     }
 
-    public void verify(EditText editTextEmail, EditText editTextPassword, AuthenticationCallback call){
+    public void verify(String email, String password, AuthenticationCallback call){
 
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -49,6 +48,10 @@ public class AdminFragmentModel {
                             }
                         }
                     });
+    }
+
+    public void goBack(){
+        AdminFragmentModel.isAdmin = false;
     }
 
 

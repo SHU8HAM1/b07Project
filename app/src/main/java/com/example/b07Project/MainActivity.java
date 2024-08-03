@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AdminFragmentModel.isAdmin = false;
+
                 back(v);
             }
         });
-        if (!AdminFragmentModel.isAdmin){
+        //if (!AdminFragmentModel.isAdmin){
             AdminFragmentView adminView = new AdminFragmentView();
             AdminFragmentModel model = new AdminFragmentModel();
             AdminFragmentPresenter presenter = new AdminFragmentPresenter(adminView, model);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
                 }
             });
-        }
+        //}
 
 
     }
