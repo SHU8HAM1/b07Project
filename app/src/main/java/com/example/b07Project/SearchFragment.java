@@ -1,17 +1,21 @@
 package com.example.b07Project;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import static java.lang.Integer.parseInt;
-import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.b07project.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchFragment extends DialogFragment {
 
     DatabaseReference db;
 
@@ -28,31 +32,40 @@ public class SearchActivity extends AppCompatActivity {
     EditText inputPeriod;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        View view = inflater.inflate(R.layout.activity_search, container, false);
 
         db = FirebaseDatabase.getInstance().getReference("Items");
 
-        textLotNum = findViewById(R.id.textLotNum);
-        inputLotNum = findViewById(R.id.inputLotNum);
+        textLotNum = view.findViewById(R.id.textLotNum);
+        inputLotNum = view.findViewById(R.id.inputLotNum);
 
-        textName = findViewById(R.id.textName);
-        inputName = findViewById(R.id.inputName);
+        textName = view.findViewById(R.id.textName);
+        inputName = view.findViewById(R.id.inputName);
 
-        textCategory = findViewById(R.id.textCategory);
-        inputCategory = findViewById(R.id.inputCategory);
+        textCategory = view.findViewById(R.id.textCategory);
+        inputCategory = view.findViewById(R.id.inputCategory);
 
-        textPeriod = findViewById(R.id.textPeriod);
-        inputPeriod = findViewById(R.id.inputPeriod);
+        textPeriod = view.findViewById(R.id.textPeriod);
+        inputPeriod = view.findViewById(R.id.inputPeriod);
 
         Search.readData(db);
+
+        Button searchButton = view.findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {searchItems();}
+
+        });
+
+
+
+        return view;
     }
 
-
-
-    public void searchItems(View view) {
+    public void searchItems() {
 
         String lotNumberInput = inputLotNum.getText().toString();
         String nameInput = inputName.getText().toString().trim();
@@ -65,15 +78,6 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             Search.searchByOther(db, nameInput, categoryInput, periodInput);
         }
-
-    }
-
-
-    public void remove(View view) {
-
-        Intent intent = new Intent(SearchActivity.this, RemoveActivity.class);
-        intent.putExtra("lotNumber", inputLotNum.getText().toString());
-        startActivity(intent);
 
     }
 

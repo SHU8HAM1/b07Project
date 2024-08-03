@@ -53,7 +53,7 @@ public class RemoveActivity extends AppCompatActivity {
 
     public void removeDeny(View view) {
 
-        Intent intent = new Intent(RemoveActivity.this, SearchActivity.class);
+        Intent intent = new Intent(RemoveActivity.this, SearchFragment.class);
         startActivity(intent);
     }
 
