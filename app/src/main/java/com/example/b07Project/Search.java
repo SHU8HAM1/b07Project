@@ -14,7 +14,7 @@ public class Search {
 
     static String TAG = "SearchActivity";
 
-    public static void readData(DatabaseReference db, List<Item> itemList) {
+    public static List<Item> readData(DatabaseReference db, List<Item> itemList) {
 
         db.addValueEventListener(new ValueEventListener() {
 
@@ -43,9 +43,11 @@ public class Search {
                 Log.w(TAG, "Error Reading Value", error.toException());
             }
         });
+
+        return itemList;
     }
 
-    static void searchByLotNumber(DatabaseReference db, int lotNumber, List<Item> searchList) {
+    static List<Item> searchByLotNumber(DatabaseReference db, int lotNumber, List<Item> searchList) {
 
         db.child(String.valueOf(lotNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -66,9 +68,11 @@ public class Search {
                 Log.w(TAG, "Error Reading Value", error.toException());
             }
         });
+
+        return searchList;
     }
 
-    static void searchByOther(DatabaseReference db, String name, String category, String period, List<Item> searchList) {
+    static List<Item> searchByOther(DatabaseReference db, String name, String category, String period, List<Item> searchList) {
 
         db.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -122,6 +126,8 @@ public class Search {
             }
         });
 
+        return searchList;
+
     }
 
     static void printSearchList(List<Item> searchList) {
@@ -143,6 +149,5 @@ public class Search {
         }
 
     }
-
 
 }
