@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="600dp"
+    android:layout_height="450dp"
     android:rotationX="2"
     android:translationX="5dp"
     android:translationY="0dp"
@@ -15,7 +15,7 @@
 
     <RelativeLayout
         android:layout_width="350dp"
-        android:layout_height="600dp"
+        android:layout_height="450dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +31,7 @@
             android:inputType="text"
             android:text="Keywords"
             android:translationX="40dp"
-            android:translationY="210dp"
+            android:translationY="170dp"
             app:layout_constraintBottom_toTopOf="@+id/noDesc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.286"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:translationX="70dp"
-            android:translationY="150dp"
+            android:translationY="120dp"
             app:layout_constraintBottom_toTopOf="@+id/report_query"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
             android:layout_marginTop="136dp"
             android:text="Without Description"
             android:translationX="50dp"
-            android:translationY="230dp"
+            android:translationY="180dp"
             app:layout_constraintBottom_toTopOf="@+id/Desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
@@ -73,16 +73,17 @@
             android:layout_height="60dp"
             android:text="With Description"
             android:translationX="70dp"
-            android:translationY="300dp" />
+            android:translationY="250dp" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_height="80dp"
             android:text="Generate Pdf Report"
+            android:textAlignment="center"
             android:textFontWeight="@integer/material_motion_duration_medium_1"
             android:textSize="30dp"
             android:translationX="70dp"
-            android:translationY="100dp" />
+            android:translationY="20dp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +45,7 @@ public class ReportPresenter {
     private ExecutorService executorService;
     private Handler mainHandler;
 
+
     public ReportPresenter(ReportFragment fragment, Context context){
         this.fragment = fragment;
         this.context = context;
@@ -48,7 +55,17 @@ public class ReportPresenter {
 
 
     public void withDescClicked(String query, String selectedItem){
-        if(Objects.equals(query, "") && selectedItem != "All Items"){
+        if(selectedItem == "All Items"){
+            List<Item> itemList = new ArrayList<Item>();
+            itemList.add(new Item());
+            itemList.add(new Item());
+            itemList.add(new Item());
+            itemList.add(new Item());
+            itemList.add(new Item());
+            executorService.execute(new GeneratePdfTask(context, itemList));
+            Log.d("GENERATED", "generated the new pdf");
+        }
+        else if(Objects.equals(query, "")){
             fragment.displayMessage(context, "Query cannot be empty");
         }
 //        else if(searchItem().isEmpty()){
@@ -56,6 +73,10 @@ public class ReportPresenter {
 //        }
         else{
             List<Item> itemList = new ArrayList<Item>();
+            itemList.add(new Item());
+            itemList.add(new Item());
+            itemList.add(new Item());
+            itemList.add(new Item());
             itemList.add(new Item());
             executorService.execute(new GeneratePdfTask(context, itemList));
             Log.d("GENERATED", "generated the new pdf");
@@ -103,10 +124,10 @@ public class ReportPresenter {
 
         for (int i = 0; i < itemList.size(); i++) {
 
-            row[0] = "" + itemList.get(i).getLot_num();
-            row[1] = itemList.get(i).getName();
-            row[2] = itemList.get(i).getCategory();
-            row[3] = itemList.get(i).getPeriod();
+            row[0] = "" + itemList.get(i).lotNumber;
+            row[1] = itemList.get(i).name;
+            row[2] = itemList.get(i).category;
+            row[3] = itemList.get(i).period;
 
             if (currentHeight >= (pageHeight - 100)) {
                 pdfDocument.finishPage(page);
@@ -236,24 +257,53 @@ public class ReportPresenter {
             name.setTextColor(Color.BLUE);
             name.setAllCaps(true);
             name.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD_ITALIC));
-
+            int pageNum = 0;
 
             for (Item item : items) {
-                Log.i("In here", "fashkj");
 
-                Bitmap bitmap = loadImage(item.getPicture());
+                name = new TextView(context);
+                description = new TextView(context);
+
+                description.setHeight(750);
+                description.setWidth(600);
+                description.setTextColor(Color.BLACK);
+
+                name.setHeight(200);
+                name.setWidth(425);
+                name.setTextSize(18);
+                name.setTextColor(Color.BLACK);
+                name.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
+
+                Bitmap bitmap;
+                Log.i("In here", "fashkj");
+                if(item.uri.trim().isEmpty()){
+                    bitmap = loadImage(
+                            "https://firebasestorage.googleapis.com/v0/b/b07project-d4d14.appspot." +
+                                    "com/o/uploads%2Fno-image-available.jpg?alt=media&token=" +
+                                    "7c5b44ac-7f76-459c-a8d2-a6376961505f");
+                } else {
+                    bitmap = loadImage(item.uri);
+                }
                 Log.w("BITMAP", "Generated");
 
-                description.setText(item.getDescription());
-                name.setText(item.getName());
+                if(!item.description.trim().isEmpty()) {
+                    description.setText(item.description);
+                    descriptionSize = max(18 - item.description.length() / 120, 2);
+                } else{
+                    description.setText("No description available");
+                }
+                if(!item.name.trim().isEmpty()) {
+                    name.setText(item.name);
+                    nameSize = max(24 - item.name.length() / 40, 12);
+                } else{
+                    name.setText("Unnamed");
+                }
 
-                descriptionSize = max(20 - item.getDescription().length()/120, 2);
-                nameSize = max(28 - item.getDescription().length()/40, 12);
 
                 description.setTextSize(descriptionSize);
                 name.setTextSize(nameSize);
 
-                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1200, 900, 1).create();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1200, 900, pageNum).create();
                 PdfDocument.Page page = pdfDocument.startPage(pageInfo);
 
                 name.layout(0, 0, 425, 200);
@@ -271,7 +321,10 @@ public class ReportPresenter {
                 canvas.restore();
                 canvas.drawBitmap(bitmap, 690, 275, null);
 
+
+
                 pdfDocument.finishPage(page);
+                pageNum++;
             }
 
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
