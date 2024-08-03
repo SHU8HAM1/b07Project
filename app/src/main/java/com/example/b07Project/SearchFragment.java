@@ -15,11 +15,17 @@ import com.example.b07project.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchFragment extends DialogFragment {
 
     DatabaseReference db;
 
     private static final String TAG = "SearchActivity";
+
+    static List<Item> itemList = new ArrayList<>();
+    static List<Item> searchList = new ArrayList<>();
 
     TextView textLotNum;
     TextView textName;
@@ -50,7 +56,7 @@ public class SearchFragment extends DialogFragment {
         textPeriod = view.findViewById(R.id.textPeriod);
         inputPeriod = view.findViewById(R.id.inputPeriod);
 
-        Search.readData(db);
+        Search.readData(db, itemList);
 
         Button searchButton = view.findViewById(R.id.searchButton);
 
@@ -74,9 +80,9 @@ public class SearchFragment extends DialogFragment {
 
         if (!lotNumberInput.isEmpty()) {
             int lotNumber = Integer.parseInt(lotNumberInput);
-            Search.searchByLotNumber(db, lotNumber);
+            Search.searchByLotNumber(db, lotNumber, searchList);
         } else {
-            Search.searchByOther(db, nameInput, categoryInput, periodInput);
+            Search.searchByOther(db, nameInput, categoryInput, periodInput, searchList);
         }
 
     }

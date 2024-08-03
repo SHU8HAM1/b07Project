@@ -14,10 +14,7 @@ public class Search {
 
     static String TAG = "SearchActivity";
 
-    static List<Item> itemList = new ArrayList<>();
-    static List<Item> searchList = new ArrayList<>();
-
-    public static void readData(DatabaseReference db) {
+    public static void readData(DatabaseReference db, List<Item> itemList) {
 
         db.addValueEventListener(new ValueEventListener() {
 
@@ -35,7 +32,7 @@ public class Search {
                         itemList.add(item);
                     }
 
-                    printItemList();
+                    printItemList(itemList);
                 } catch (Exception e) {
                     Log.e(TAG, "Database Error.", e);
                 }
@@ -48,7 +45,7 @@ public class Search {
         });
     }
 
-    static void searchByLotNumber(DatabaseReference db, int lotNumber) {
+    static void searchByLotNumber(DatabaseReference db, int lotNumber, List<Item> searchList) {
 
         db.child(String.valueOf(lotNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -58,7 +55,7 @@ public class Search {
                 if (item != null) {
                     item.lotNumber = lotNumber;
                     searchList.add(item);
-                    printSearchList();
+                    printSearchList(searchList);
                 } else {
                     Log.w(TAG, "No item found with lot number: " + lotNumber);
                 }
@@ -71,7 +68,7 @@ public class Search {
         });
     }
 
-    static void searchByOther(DatabaseReference db, String name, String category, String period) {
+    static void searchByOther(DatabaseReference db, String name, String category, String period, List<Item> searchList) {
 
         db.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -116,7 +113,7 @@ public class Search {
                     }
                 }
 
-                printSearchList();
+                printSearchList(searchList);
             }
 
             @Override
@@ -127,7 +124,7 @@ public class Search {
 
     }
 
-    static void printSearchList() {
+    static void printSearchList(List<Item> searchList) {
 
         if (!(searchList.isEmpty())) {
             for (Item item : searchList) {
@@ -139,7 +136,7 @@ public class Search {
 
     }
 
-    static void printItemList() {
+    static void printItemList(List<Item> itemList) {
 
         for (Item item : itemList) {
             Log.d(TAG, "LotNumber: " + item.lotNumber + ", Item name: " + item.name + ", description: " + item.description + ", category: " + item.category + ", period: " + item.period + ", uri: " + item.uri);
