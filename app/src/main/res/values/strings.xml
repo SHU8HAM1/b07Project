@@ -16,6 +16,10 @@
     <string name="next_page"> Next page </string>
     <string name="view"> View </string>
     <string name="search"> Search </string>
+    <string name="add"> Add </string>
+    <string name="report"> Report </string>
+    <string name="remove"> Remove </string>
+    <string name="back"> Back </string>
     <string name="example_yellow_vase">Example: Yellow-Glazed Flat Vase</string>
     <!--
     We need a way to fetch categories and periods from the database
