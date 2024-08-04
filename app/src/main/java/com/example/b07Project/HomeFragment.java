@@ -4,6 +4,7 @@ import static com.example.b07project.R.id.button;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,17 +36,11 @@ public class HomeFragment extends Fragment {
          buttonReport = view.findViewById(R.id.report_button);
          buttonSearch = view.findViewById(R.id.search_button);
 
-        buttonAdd.setVisibility(View.GONE);
-        buttonReport.setVisibility(View.GONE);
-        buttonRemove.setVisibility(View.GONE);
-        buttonBack.setVisibility(View.GONE);
-        buttonSearch.setVisibility(View.VISIBLE);
+
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 back(v);
             }
         });
@@ -57,16 +52,15 @@ public class HomeFragment extends Fragment {
                 AdminFragmentPresenter presenter = new AdminFragmentPresenter(adminView, model);
                 adminView.presenter = presenter;
                 loadFragment(adminView);
-                /*fragmentManager.beginTransaction()
-                        .add(android.R.id.content, presenter.view, "adminFragment")
-                        .setReorderingAllowed(true)
-                        .addToBackStack(null)
-                        .commit();*/
                 buttonAdmin.setVisibility(View.GONE);
                 buttonSearch.setVisibility(View.GONE);
             }
         });
-
+        buttonAdd.setVisibility(View.GONE);
+        buttonReport.setVisibility(View.GONE);
+        buttonRemove.setVisibility(View.GONE);
+        buttonBack.setVisibility(View.GONE);
+        buttonSearch.setVisibility(View.VISIBLE);
         if (AdminFragmentModel.isAdmin){
             buttonAdmin.setVisibility(View.GONE);
             buttonAdd.setVisibility(View.VISIBLE);
