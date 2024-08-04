@@ -1,4 +1,4 @@
-package com.example.b07Project;
+package com.example.b07project;
 
 public class Item {
     public int lotNumber;

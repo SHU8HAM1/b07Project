@@ -1,4 +1,4 @@
-package com.example.b07Project;
+package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RemoveActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "RemoveActivity";
 
     public String lotNumber;
 

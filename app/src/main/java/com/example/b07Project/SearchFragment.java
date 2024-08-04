@@ -1,4 +1,4 @@
-package com.example.b07Project;
+package com.example.b07project;
 
 import android.os.Bundle;
 
@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.b07project.Item;
 import com.example.b07project.R;
+import com.example.b07project.Search;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -56,9 +59,14 @@ public class SearchFragment extends DialogFragment {
         textPeriod = view.findViewById(R.id.textPeriod);
         inputPeriod = view.findViewById(R.id.inputPeriod);
 
-        Search s = new Search();
 
-        s.readData(itemList);
+
+        Search.readData(db, itemList, new Search.DataReadCallback() {
+            @Override
+            public void onDataRead(List<Item> itemList) {
+                Search.printSearchList(itemList);
+            }
+        });
 
         Button searchButton = view.findViewById(R.id.searchButton);
 
@@ -84,9 +92,19 @@ public class SearchFragment extends DialogFragment {
 
         if (!lotNumberInput.isEmpty()) {
             int lotNumber = Integer.parseInt(lotNumberInput);
-            s.searchByLotNumber(lotNumber, searchList);
+            s.searchByLotNumber(db, lotNumber, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    Search.printSearchList(itemList);
+                }
+            });
         } else {
-            s.searchByOther(nameInput, categoryInput, periodInput, searchList);
+            s.searchByOther(db, nameInput, categoryInput, periodInput, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    Search.printSearchList(itemList);
+                }
+            });
         }
 
     }

@@ -1,4 +1,8 @@
-package com.example.b07Project;
+package com.example.b07project;
+
+import static java.lang.Integer.parseInt;
+
+import com.example.b07project.Item;
 
 import static java.lang.Integer.parseInt;
 
@@ -48,14 +52,18 @@ public class Search {
         });
     }
 
-    static List<Item> searchByLotNumber(DatabaseReference db, int lotNumber, DataReadCallback callback) {
+    public static List<Item> searchByLotNumber(DatabaseReference db, int lotNumber, DataReadCallback callback) {
 
         List<Item> searchList = new ArrayList<>();
 
         db.child(String.valueOf(lotNumber)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                searchList.clear(); // Clear the list to avoid duplication
+
                 searchList.clear();
+
                 Item item = dataSnapshot.getValue(Item.class);
                 if (item != null) {
                     item.lotNumber = lotNumber;
@@ -75,7 +83,7 @@ public class Search {
         return searchList;
     }
 
-    static List<Item> searchByOther(DatabaseReference db, String name, String category,
+    public static List<Item> searchByOther(DatabaseReference db, String name, String category,
                                     String period, DataReadCallback callback) {
 
         List<Item> searchList = new ArrayList<>();
@@ -135,7 +143,7 @@ public class Search {
         return searchList;
     }
 
-    static void printSearchList(List<Item> searchList) {
+    public static void printSearchList(List<Item> searchList) {
 
         if (!(searchList.isEmpty())) {
             for (Item item : searchList) {
