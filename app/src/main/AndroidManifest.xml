@@ -20,9 +20,13 @@ xmlns:tools="http://schemas.android.com/tools">
         android:exported="true" />
 
     <activity
-        android:name="SearchFragment"
+        android:name=".SearchFragment"
         android:exported="false" />
 
+    <activity
+        android:name=".AddItemFragment"
+        android:exported="false" />
+    
     <activity
         android:name=".ReportFragment"
         android:exported="false" />

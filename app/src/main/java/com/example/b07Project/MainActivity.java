@@ -64,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button AddButton = findViewById(R.id.addButton);
+
+        AddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new AddItemFragment());
+
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
     }
 
 

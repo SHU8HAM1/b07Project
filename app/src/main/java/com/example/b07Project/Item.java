@@ -1,5 +1,6 @@
 package com.example.b07project;
 
+
 public class Item {
     public int lotNumber;
     public String category;
@@ -12,7 +13,7 @@ public class Item {
 
     }
 
-    public Item(int lotNumber, String category, String description, String name, String period) {
+    public Item(int lotNumber, String category, String description, String name, String period, String uri) {
         this.lotNumber = lotNumber;
         this.category = category;
         this.description = description;

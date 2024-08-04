@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.b07project.AddItemFragment">
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:gravity="start|center"
+        android:text="@string/item_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textCategory"
+        app:layout_constraintEnd_toStartOf="@+id/editName"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLotNumber" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLotNumber" />
+
+    <TextView
+        android:id="@+id/textLotNumber"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:gravity="start|center"
+        android:text="@string/lot_number"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editLotNumber"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:hint="Example: 12345678" />
+
+    <TextView
+        android:id="@+id/textCategory"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:gravity="start|center"
+        android:text="@string/category"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.254" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253" />
+
+    <TextView
+        android:id="@+id/textPeriod"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:gravity="start|center"
+        android:text="@string/period"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCategory"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <Spinner
+        android:id="@+id/spinnerPeriod"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategory"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="416dp"
+        android:gravity="start|center"
+        android:text="@string/description"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="260dp"
+        android:layout_height="110dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474"
+        tools:hint="Provide details" />
+
+    <TextView
+        android:id="@+id/textUpload"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:gravity="start|center"
+        android:text="@string/picture_video"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDescription"
+        app:layout_constraintVertical_bias="0.23" />
+
+    <Button
+        android:id="@+id/buttonUpload"
+        android:layout_width="206dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="64dp"
+        android:text="Upload File Here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="146dp"
+        android:layout_height="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957"
+        android:text="@string/submit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
