@@ -45,6 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.firebase:firebase-database:20.0.7") // or the latest version
     implementation("com.github.bumptech.glide:glide:4.11.0")
     implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     annotationProcessor(libs.compiler)

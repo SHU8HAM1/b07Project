@@ -1,6 +1,7 @@
 package com.example.b07project;
 
 import static java.lang.Integer.max;
+import static java.lang.Integer.parseInt;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -44,51 +45,165 @@ public class ReportPresenter {
     private ReportFragment fragment;
     private ExecutorService executorService;
     private Handler mainHandler;
-
+    private List<Item> itemList;
+    private FirebaseDatabase db;
+    private DatabaseReference itemsRef;
 
     public ReportPresenter(ReportFragment fragment, Context context){
         this.fragment = fragment;
         this.context = context;
         this.mainHandler = new Handler(Looper.getMainLooper());
         this.executorService = Executors.newSingleThreadExecutor();
+        db = FirebaseDatabase.getInstance("https://b07project-d4d14-default-rtdb.firebaseio.com/");
+        itemsRef = db.getReference().child("Items");
     }
 
 
     public void withDescClicked(String query, String selectedItem){
-        if(selectedItem == "All Items"){
-            List<Item> itemList = new ArrayList<Item>();
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            executorService.execute(new GeneratePdfTask(context, itemList));
-            Log.d("GENERATED", "generated the new pdf");
+
+        Log.e("SELECTEDITEM", selectedItem);
+
+        List<Item> itemList = new ArrayList<>();
+
+        if(selectedItem.equalsIgnoreCase("All Items")){
+            Log.i("INHERE", "dsjlkfa");
+            Search.readData(itemsRef, itemList, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    Search.printSearchList(itemList);
+                    executorService.execute(new GeneratePdfTask(context, itemList));
+                    Log.d("GENERATED", "shuhudh");
+                }
+            });
         }
-        else if(Objects.equals(query, "")){
+        else if(query.isEmpty()){
             fragment.displayMessage(context, "Query cannot be empty");
         }
-//        else if(searchItem().isEmpty()){
-//            fragment.displayMessage(context, "No data found that matches your search");
-//        }
+        else if(selectedItem.equals("Lot Number")){
+            int lot_num = -10001;
+            try {
+                lot_num = parseInt(query);
+            }
+            catch(Exception e){
+                fragment.displayMessage(context,"Not a number. Please enter a valid number.");
+            }
+            if(lot_num != -1001) {
+                Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
+                    @Override
+                    public void onDataRead(List<Item> itemList) {
+                        if(itemList.isEmpty()){
+                            fragment.displayMessage(context, "No item found with the lot number");
+                        } else {
+                            executorService.execute(new GeneratePdfTask(context, itemList));
+                            Log.d("GENERATED", "generated the new pdf");
+                        }
+                    }});
+                }
+        }
+
         else{
-            List<Item> itemList = new ArrayList<Item>();
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            itemList.add(new Item());
-            executorService.execute(new GeneratePdfTask(context, itemList));
-            Log.d("GENERATED", "generated the new pdf");
+
+            String name = "";
+            String category = "";
+            String period = "";
+
+            if(selectedItem.equalsIgnoreCase("Name")){
+                name = query;
+            } else if(selectedItem.equalsIgnoreCase("Category")){
+                category = query;
+            } else if(selectedItem.equalsIgnoreCase("Period")){
+                period = query;
+            }
+
+            Search.searchByOther(itemsRef, name, category, period, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    if(itemList.isEmpty()){
+                        fragment.displayMessage(context, "No item found matching the query");
+                    } else {
+                        executorService.execute(new GeneratePdfTask(context, itemList));
+                        Log.d("GENERATED", "generated the new pdf");
+                    }
+                }});
         }
 
     }
 
-    private ArrayList<Item> searchItem() {
-        return new ArrayList<Item>();
+
+
+    public void noDescClicked(String query, String selectedItem){
+
+        Log.e("SELECTEDITEM", selectedItem);
+
+        List<Item> itemList = new ArrayList<>();
+
+        if(selectedItem.equalsIgnoreCase("All Items")){
+            Log.i("INHERE", "dsjlkfa");
+            Search.readData(itemsRef, itemList, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    Search.printSearchList(itemList);
+                    createPdf(itemList);
+                    Log.d("GENERATED", "shuhudh");
+                }
+            });
+        }
+        else if(query.isEmpty()){
+            fragment.displayMessage(context, "Query cannot be empty");
+        }
+        else if(selectedItem.equals("Lot Number")){
+            int lot_num = -10001;
+            try {
+                lot_num = parseInt(query);
+            }
+            catch(Exception e){
+                fragment.displayMessage(context,"Not a number. Please enter a valid number.");
+            }
+            if(lot_num != -1001) {
+                Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
+                    @Override
+                    public void onDataRead(List<Item> itemList) {
+                        if(itemList.isEmpty()){
+                            fragment.displayMessage(context, "No item found with the lot number");
+                        } else {
+                            createPdf(itemList);
+                            Log.d("GENERATED", "generated the new pdf");
+                        }
+                    }});
+            }
+        }
+
+        else{
+
+            String name = "";
+            String category = "";
+            String period = "";
+
+            if(selectedItem.equalsIgnoreCase("Name")){
+                name = query;
+            } else if(selectedItem.equalsIgnoreCase("Category")){
+                category = query;
+            } else if(selectedItem.equalsIgnoreCase("Period")){
+                period = query;
+            }
+
+            itemList = Search.searchByOther(itemsRef, name, category, period, new Search.DataReadCallback() {
+                @Override
+                public void onDataRead(List<Item> itemList) {
+                    if(itemList.isEmpty()){
+                        fragment.displayMessage(context, "No item found matching the query");
+                    } else {
+                        createPdf(itemList);
+                        Log.d("GENERATED", "generated the new pdf");
+                    }
+                }});
+        }
+
     }
 
-    public void createPdf(){
+
+
+    public void createPdf(List<Item> itemList){
         int pageWidth = 595; // A4 dimensions
         int pageHeight = 842;
         int rowHeight = 50;
@@ -97,14 +212,6 @@ public class ReportPresenter {
         String[] row = {"Lot", "Name", "Category", "Period"};
         String[] header = {"Lot #", "Name", "Category", "Period"};
         final int ROWS_PER_PAGE = 15;
-
-        ArrayList<Item> itemList = new ArrayList<Item>();
-
-        Item item = new Item();
-        for(int num = 0; num < 19; num++) {
-            itemList.add(item);
-        }
-
 
 
         PdfDocument pdfDocument = new PdfDocument();
