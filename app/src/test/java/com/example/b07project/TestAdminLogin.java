@@ -50,13 +50,6 @@ public class TestAdminLogin {
 
 
    }
-    /*when(email.getText().toString().trim()).thenReturn("123@gmail.com");
-       when(password.getText().toString().trim()).thenReturn("987654321");
 
-       AdminFragmentModel.isAdmin = false;
-       AdminFragmentPresenter presenter = new AdminFragmentPresenter(view, model);
-       presenter.onClickLogin(email, password);
-       verify(view).showLoginSuccess();
-       verify(view).back();*/
 
 }
