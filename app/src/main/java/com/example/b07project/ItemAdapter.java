@@ -22,19 +22,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
     private List<Item> itemList;
     private HashSet<Integer> expandedPositions;
     public static List<Integer> selectedItemLot;
-    private boolean isAdminMode;
 
     public ItemAdapter(List<Item> dataList) {
         this.itemList = dataList;
         this.expandedPositions = new HashSet<>();
-        this.isAdminMode = false;
         selectedItemLot = new ArrayList<>();
-    }
-
-    public void setAdminMode() {
-        this.isAdminMode = true;
-        Log.d("AdminMode", "Admin Mode set to true");
-        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,12 +68,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         }
         else{
             holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
-        }
-        Log.d("AdminMode", "isAdminMode: " + isAdminMode);
-        if(isAdminMode){
-            holder.checkBox.setVisibility(View.VISIBLE);
-        }else{
-            holder.checkBox.setVisibility(View.GONE);
         }
         holder.checkBox.setChecked(selectedItemLot.contains(data.getLotNumber()));
         holder.checkBox.setOnClickListener(v -> {

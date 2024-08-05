@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +40,6 @@ public class RecyclerViewFragment extends Fragment {
 
 
     public static void updateData(List<Item> items){
-        Log.d("RecyclerViewFragment", "Updating data in adapter");
         adapter = new ItemAdapter(items);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -118,7 +116,8 @@ public class RecyclerViewFragment extends Fragment {
             buttonAdd.setVisibility(View.VISIBLE);
             buttonReport.setVisibility(View.VISIBLE);
             buttonRemove.setVisibility(View.VISIBLE);
-            adapter.setAdminMode();
+//            buttonBack.setVisibility(View.VISIBLE);
+
         }
         return view;
     }
