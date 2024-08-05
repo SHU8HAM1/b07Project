@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">B07 Project</string>
 
+
     <string name="lot_number">Lot Number</string>
     <string name="item_name">Name</string>
     <string name="category">Category</string>
@@ -12,12 +13,9 @@
     <string name="huh">item_name</string>
 
     <string name = "title">"Toronto Asian Art Museum Collection Management" </string>
-    <string name = "admin"> Admin </string>
     <string name = "select"> Select </string>
     <string name = "prev_page"> Prev. page </string>
     <string name = "next_page"> Next page </string>
-    <string name = "view"> View </string>
-    <string name = "search"> Search </string>
 
     <string name="example_yellow_vase">Example: Yellow-Glazed Flat Vase</string>
     <!--
@@ -65,5 +63,19 @@
         <item>Category</item>
         <item>Period</item>
     </string-array>
+    <string name="view"> View </string>
+    <string name="search"> Search </string>
+    <string name="add"> Add </string>
+    <string name="report"> Report </string>
+    <string name="remove"> Remove </string>
+    <string name="back"> Back </string>
+
+    <string name="admin">Admin</string>
+    <string name="login">Login</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="email">Email:</string>
+    <string name="register">Register</string>
+
 
 </resources>
