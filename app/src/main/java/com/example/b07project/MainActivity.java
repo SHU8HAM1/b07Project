@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSearch = findViewById(R.id.search_button);*/
 
         if(savedInstanceState == null) {
-            loadFragment(new HomeFragment());
+            loadFragment(new RecyclerViewFragment());
         }
 
 

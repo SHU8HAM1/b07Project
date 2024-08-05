@@ -56,7 +56,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         holder.category.setText(data.getCategory());
         holder.period.setText(data.getPeriod());
         holder.description.setText(data.getDescription());
-        Picasso.get().load(data.getUri()).fit().centerCrop().into(holder.imageView);
+        if(data.getUri() != null && !data.getUri().isEmpty()) {
+            Picasso.get().load(data.getUri()).fit().centerCrop().into(holder.imageView);
+        }
+        else{
+            holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+        }
         boolean isExpanded = expandedPositions.contains(position);
         if(isExpanded){
             holder.description.setMaxLines(Integer.MAX_VALUE);

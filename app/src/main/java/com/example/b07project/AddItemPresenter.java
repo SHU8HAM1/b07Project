@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
+import com.example.b07project.AddItemFragment;
+
 
 public class AddItemPresenter{
     private AddItemFragment view;
