@@ -114,13 +114,14 @@ public class Search {
                         if (name.isEmpty() && category.isEmpty() && period.isEmpty()) {
                             matches = false;
                         }
-                        if (!name.isEmpty() && !item.name.equals(name)) {
+                        if (!name.isEmpty() && !item.name.equalsIgnoreCase(name)
+                        ) {
                             matches = false;
                         }
-                        if (!category.isEmpty() && !item.category.equals(category)) {
+                        if (!category.isEmpty() && !item.category.equalsIgnoreCase(category)) {
                             matches = false;
                         }
-                        if (!period.isEmpty() && !item.period.equals(period)) {
+                        if (!period.isEmpty() && !item.period.equalsIgnoreCase(period)) {
                             matches = false;
                         }
                         if (matches) {
@@ -152,6 +153,12 @@ public class Search {
         } else {
             Log.d(TAG, "No Items Found with that search");
         }
+
+    }
+
+    public static List<Item> sendSearchList(List<Item> searchList) {
+
+        return searchList;
 
     }
 

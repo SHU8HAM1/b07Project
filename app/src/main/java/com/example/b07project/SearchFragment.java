@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.b07project.Item;
 import com.example.b07project.R;
@@ -72,7 +73,10 @@ public class SearchFragment extends DialogFragment {
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {searchItems();}
+            public void onClick(View v) {
+                searchItems();
+                dismiss();
+            }
 
         });
 
@@ -95,14 +99,24 @@ public class SearchFragment extends DialogFragment {
             s.searchByLotNumber(db, lotNumber, new Search.DataReadCallback() {
                 @Override
                 public void onDataRead(List<Item> itemList) {
-                    Search.printSearchList(itemList);
+                    if(itemList.isEmpty()){
+                        Toast.makeText(getContext(), "Item Not Found", Toast.LENGTH_SHORT).show();
+                    }else {
+                        RecyclerViewFragment.itemList = itemList;
+                        RecyclerViewFragment.updateData(itemList);
+                    }
                 }
             });
         } else {
             s.searchByOther(db, nameInput, categoryInput, periodInput, new Search.DataReadCallback() {
                 @Override
                 public void onDataRead(List<Item> itemList) {
-                    Search.printSearchList(itemList);
+                    if(itemList.isEmpty()){
+                        Toast.makeText(getContext(), "Item Not Found", Toast.LENGTH_SHORT).show();
+                    }else {
+                        RecyclerViewFragment.itemList = itemList;
+                        RecyclerViewFragment.updateData(itemList);
+                    }
                 }
             });
         }

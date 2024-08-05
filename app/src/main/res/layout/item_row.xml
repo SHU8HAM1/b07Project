@@ -54,6 +54,16 @@
 
             <!-- CheckBox, ImageView, Category, Period and Description -->
 
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="21dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@id/imageView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imageView2" />
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="70dp"
@@ -61,7 +71,7 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/picture_video"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/checkBox"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 />
 

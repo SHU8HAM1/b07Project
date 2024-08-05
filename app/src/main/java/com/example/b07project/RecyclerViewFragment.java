@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,14 +32,20 @@ import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private ItemAdapter adapter;
-    private List<Item> itemList;
-    private FirebaseDatabase db;
+    public static RecyclerView recyclerView;
+    public static ItemAdapter adapter;
+    public static List<Item> itemList;
+    public static FirebaseDatabase db;
     private DatabaseReference itemsRef;
     Button buttonAdmin ,buttonBack,buttonRemove,buttonAdd, buttonReport,buttonSearch;
 
 
+    public static void updateData(List<Item> items){
+        Log.d("RecyclerViewFragment", "Updating data in adapter");
+        adapter = new ItemAdapter(items);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class RecyclerViewFragment extends Fragment {
         buttonAdd = view.findViewById(R.id.add_button);
         buttonReport = view.findViewById(R.id.report_button);
         buttonSearch = view.findViewById(R.id.search_button);
+
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -103,18 +111,18 @@ public class RecyclerViewFragment extends Fragment {
         buttonAdd.setVisibility(View.GONE);
         buttonReport.setVisibility(View.GONE);
         buttonRemove.setVisibility(View.GONE);
-        buttonBack.setVisibility(View.GONE);
+        buttonBack.setVisibility(View.VISIBLE);
         buttonSearch.setVisibility(View.VISIBLE);
         if (AdminFragmentModel.isAdmin){
             buttonAdmin.setVisibility(View.GONE);
             buttonAdd.setVisibility(View.VISIBLE);
             buttonReport.setVisibility(View.VISIBLE);
             buttonRemove.setVisibility(View.VISIBLE);
-            buttonBack.setVisibility(View.VISIBLE);
-
+            adapter.setAdminMode();
         }
         return view;
     }
+
     private void loadData () {
         Query query;
         query = itemsRef.orderByKey().startAfter("-1");
@@ -126,9 +134,8 @@ public class RecyclerViewFragment extends Fragment {
                     Item item = snapshot.getValue(Item.class);
                     itemList.add(item);
                 }
-                adapter = new ItemAdapter(itemList);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                updateData(itemList);
+
             }
 
             @Override
