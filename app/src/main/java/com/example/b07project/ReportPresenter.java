@@ -395,7 +395,7 @@ public class ReportPresenter {
 
                 if(!item.description.trim().isEmpty()) {
                     description.setText(item.description);
-                    descriptionSize = max(18 - item.description.length() / 120, 2);
+                    descriptionSize = max(21 - item.description.length() / 120, 5);
                 } else{
                     description.setText("No description available");
                 }
