@@ -1,4 +1,4 @@
-package com.example.b07Project;
+package com.example.b07project;
 
 import android.content.Intent;
 import android.net.Uri;
