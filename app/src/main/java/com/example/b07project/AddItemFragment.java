@@ -58,18 +58,6 @@ public class AddItemFragment extends Fragment{
                 }
         );
 
-        /*buttonUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseFile();
-            }
-        });
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               submit();
-           }
-        });*/
         buttonUpload.setOnClickListener(v -> chooseFile());
         buttonSubmit.setOnClickListener(v -> submit());
         buttonBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
