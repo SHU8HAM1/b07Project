@@ -10,6 +10,7 @@
         android:id="@+id/textName"
         android:layout_width="128dp"
         android:layout_height="48dp"
+        android:layout_marginStart="24dp"
         android:gravity="start|center"
         android:text="@string/item_name"
         android:textColor="@color/black"
@@ -40,7 +41,7 @@
         android:gravity="start|center"
         android:text="@string/lot_number"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,12 +92,13 @@
         android:layout_width="128dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
         android:gravity="start|center"
         android:text="@string/period"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/spinnerPeriod"
         app:layout_constraintBottom_toTopOf="@+id/textDescription"
+        app:layout_constraintStart_toEndOf="@+id/spinnerPeriod"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCategory" />
 
@@ -118,11 +120,11 @@
         android:layout_width="128dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="484dp"
+        android:layout_marginBottom="388dp"
         android:gravity="start|center"
         android:text="@string/description"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
