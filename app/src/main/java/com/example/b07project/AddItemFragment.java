@@ -43,6 +43,7 @@ public class AddItemFragment extends Fragment{
         spinnerPeriod = view.findViewById(R.id.spinnerPeriod);
         buttonUpload = view.findViewById(R.id.buttonUpload);
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
+        Button buttonBack = view.findViewById(R.id.buttonBack);
 
         presenter = new AddItemPresenter(this);
 
@@ -69,6 +70,8 @@ public class AddItemFragment extends Fragment{
                submit();
            }
         });
+
+        buttonBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         return view;
     }

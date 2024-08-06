@@ -47,11 +47,13 @@
         android:id="@+id/editLotNumber"
         android:layout_width="260dp"
         android:layout_height="48dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textLotNumber"
         app:layout_constraintTop_toTopOf="parent"
         tools:hint="Example: 12345678" />
 
@@ -73,9 +75,11 @@
         android:id="@+id/spinnerCategory"
         android:layout_width="260dp"
         android:layout_height="48dp"
+        android:layout_marginStart="3dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textCategory"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253" />
 
@@ -97,9 +101,11 @@
         android:id="@+id/spinnerPeriod"
         android:layout_width="260dp"
         android:layout_height="48dp"
+        android:layout_marginStart="3dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textPeriod"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategory"
         app:layout_constraintVertical_bias="0.511" />
 
@@ -120,6 +126,7 @@
         android:id="@+id/editDescription"
         android:layout_width="260dp"
         android:layout_height="110dp"
+        android:layout_marginStart="3dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:gravity="start|top"
@@ -128,6 +135,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textDescription"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.474"
         tools:hint="Provide details" />
@@ -155,6 +163,7 @@
         android:text="Upload File Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textUpload"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.605" />
 
@@ -169,6 +178,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.957"
         android:text="@string/submit" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="146dp"
+        android:layout_height="84dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.955" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
