@@ -395,19 +395,20 @@ public class ReportPresenter {
                 }
                 Log.w("BITMAP", "Generated");
 
-                if(!item.description.trim().isEmpty()) {
-                    description.setText(item.description);
-                    descriptionSize = max(16 - item.description.length() / 120, 6);
+                if(!item.getDescription().trim().isEmpty()) {
+                    description.setText(item.getDescription());
+                    descriptionSize = max(16 - item.getDescription().length() / 120, 6);
                 } else{
                     description.setText("No description available");
                 }
-                if(!item.name.trim().isEmpty()) {
-                    name.setText(item.name);
-                    nameSize = max(16 - item.name.length() / 40, 7);
+                if(!item.getName().trim().isEmpty()) {
+                    name.setText(item.getName());
+                    nameSize = max(16 - item.getName().length() / 40, 7);
 
                 } else{
                     name.setText("Unnamed");
                 }
+
 
 
                 description.setTextSize(descriptionSize);
