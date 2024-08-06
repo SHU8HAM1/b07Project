@@ -1,5 +1,7 @@
 [versions]
 agp = "8.4.1"
+compiler = "4.11.0"
+firebaseUiStorage = "7.2.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -9,8 +11,20 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
+annotation = "1.6.0"
+lifecycleLivedataKtx = "2.6.1"
+lifecycleViewmodelKtx = "2.6.1"
+junitJunit = "4.12"
+junitJupiter = "5.8.1"
+mockitoAll = "1.10.10"
+picasso = "2.8"
 
 [libraries]
+
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+
+firebase-ui-storage = { module = "com.firebaseui:firebase-ui-storage", version.ref = "firebaseUiStorage" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -19,6 +33,16 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version = "21.0.0" }
+annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+mockito-all = { module = "org.mockito:mockito-all", version.ref = "mockitoAll" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
