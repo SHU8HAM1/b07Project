@@ -118,7 +118,7 @@ public class AddItemModel{
                         if (urlTask.isSuccessful()){
                             String uriString = urlTask.getResult().toString();
                             presenter.setUploaded();
-                            addItem(new Item(lotNum, category, description, name, period,
+                            addItem(new Item(category, description, lotNum, name, period,
                                     uriString));
                         }
                         else{
@@ -132,6 +132,6 @@ public class AddItemModel{
                 }
             });
         }
-        addItem(new Item(lotNum, category, description, name, period, ""));
+        addItem(new Item(category, description, lotNum, name, period, ""));
     }
 }
