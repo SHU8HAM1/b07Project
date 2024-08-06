@@ -26,7 +26,7 @@ xmlns:tools="http://schemas.android.com/tools">
     </activity>
 
     <activity
-        android:name="com.example.b07project.RemoveActivity"
+        android:name=".RemoveFragment"
         android:exported="true" />
 
     <activity

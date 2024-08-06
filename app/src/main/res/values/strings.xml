@@ -12,10 +12,10 @@
     <string name="submit">Submit</string>
     <string name="huh">item_name</string>
 
-    <string name = "title">"Toronto Asian Art Museum Collection Management" </string>
-    <string name = "select"> Select </string>
-    <string name = "prev_page"> Prev. page </string>
-    <string name = "next_page"> Next page </string>
+    <string name="title">"Toronto Asian Art Museum Collection Management" </string>
+    <string name="select"> Select </string>
+    <string name="prev_page"> Prev. page </string>
+    <string name="next_page"> Next page </string>
 
     <string name="example_yellow_vase">Example: Yellow-Glazed Flat Vase</string>
     <!--

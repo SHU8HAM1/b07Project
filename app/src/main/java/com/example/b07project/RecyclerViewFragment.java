@@ -26,6 +26,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -106,6 +107,20 @@ public class RecyclerViewFragment extends Fragment {
             }
         });
 
+        buttonRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // under is an example of changing the array for the items to remove
+                //RemoveFragment.lotNumbers = new int[]{1010};
+                RemoveFragment.lotNumbers = new int[ItemAdapter.selectedItemLot.size()];
+                for (int i = 0; i < ItemAdapter.selectedItemLot.size(); i++) {
+                    RemoveFragment.lotNumbers[i] = ItemAdapter.selectedItemLot.get(i);
+                }
+                loadPopup(new RemoveFragment());
+            }
+
+        });
+
         buttonAdd.setVisibility(View.GONE);
         buttonReport.setVisibility(View.GONE);
         buttonRemove.setVisibility(View.GONE);
@@ -121,6 +136,7 @@ public class RecyclerViewFragment extends Fragment {
         }
         return view;
     }
+
 
     private void loadData () {
         Query query;
