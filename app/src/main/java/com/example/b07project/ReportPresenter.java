@@ -71,6 +71,7 @@ public class ReportPresenter {
                 @Override
                 public void onDataRead(List<Item> itemList) {
                     Search.printSearchList(itemList);
+                    itemList.remove(0);
                     executorService.execute(new GeneratePdfTask(context, itemList));
                     Log.d("GENERATED", "shuhudh");
                 }
@@ -143,6 +144,7 @@ public class ReportPresenter {
                 @Override
                 public void onDataRead(List<Item> itemList) {
                     Search.printSearchList(itemList);
+                    itemList.remove(0);
                     createPdf(itemList);
                     Log.d("GENERATED", "shuhudh");
                 }
