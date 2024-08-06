@@ -71,6 +71,7 @@ public class ReportPresenter {
                 @Override
                 public void onDataRead(List<Item> itemList) {
                     Search.printSearchList(itemList);
+                    itemList.remove(0);
                     executorService.execute(new GeneratePdfTask(context, itemList));
                     Log.d("GENERATED", "shuhudh");
                 }
@@ -80,14 +81,14 @@ public class ReportPresenter {
             fragment.displayMessage(context, "Query cannot be empty");
         }
         else if(selectedItem.equals("Lot Number")){
-            int lot_num = -10001;
+            int lot_num = -1;
             try {
                 lot_num = parseInt(query);
             }
             catch(Exception e){
                 fragment.displayMessage(context,"Not a number. Please enter a valid number.");
             }
-            if(lot_num != -1001) {
+            if(lot_num != -1) {
                 Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
                     @Override
                     public void onDataRead(List<Item> itemList) {
@@ -143,6 +144,7 @@ public class ReportPresenter {
                 @Override
                 public void onDataRead(List<Item> itemList) {
                     Search.printSearchList(itemList);
+                    itemList.remove(0);
                     createPdf(itemList);
                     Log.d("GENERATED", "shuhudh");
                 }
@@ -152,14 +154,14 @@ public class ReportPresenter {
             fragment.displayMessage(context, "Query cannot be empty");
         }
         else if(selectedItem.equals("Lot Number")){
-            int lot_num = -10001;
+            int lot_num = -1;
             try {
                 lot_num = parseInt(query);
             }
             catch(Exception e){
                 fragment.displayMessage(context,"Not a number. Please enter a valid number.");
             }
-            if(lot_num != -1001) {
+            if(lot_num != -1) {
                 Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
                     @Override
                     public void onDataRead(List<Item> itemList) {
@@ -393,15 +395,16 @@ public class ReportPresenter {
                 }
                 Log.w("BITMAP", "Generated");
 
-                if(!item.getDescription().trim().isEmpty()) {
-                    description.setText(item.getDescription());
-                    descriptionSize = max(21 - item.getDescription().length() / 120, 5);
+                if(!item.description.trim().isEmpty()) {
+                    description.setText(item.description);
+                    descriptionSize = max(16 - item.description.length() / 120, 6);
                 } else{
                     description.setText("No description available");
                 }
-                if(!item.getName().trim().isEmpty()) {
-                    name.setText(item.getName());
-                    nameSize = max(24 - item.getName().length() / 40, 12);
+                if(!item.name.trim().isEmpty()) {
+                    name.setText(item.name);
+                    nameSize = max(16 - item.name.length() / 40, 7);
+
                 } else{
                     name.setText("Unnamed");
                 }
