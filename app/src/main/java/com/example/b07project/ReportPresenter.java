@@ -231,10 +231,10 @@ public class ReportPresenter {
 
         for (int i = 0; i < itemList.size(); i++) {
 
-            row[0] = "" + itemList.get(i).lotNumber;
-            row[1] = itemList.get(i).name;
-            row[2] = itemList.get(i).category;
-            row[3] = itemList.get(i).period;
+            row[0] = "" + itemList.get(i).getLotNumber();
+            row[1] = itemList.get(i).getName();
+            row[2] = itemList.get(i).getCategory();
+            row[3] = itemList.get(i).getPeriod();
 
             if (currentHeight >= (pageHeight - 100)) {
                 pdfDocument.finishPage(page);
@@ -383,25 +383,25 @@ public class ReportPresenter {
 
                 Bitmap bitmap;
                 Log.i("In here", "fashkj");
-                if(item.uri.trim().isEmpty()){
+                if(item.getUri().trim().isEmpty()){
                     bitmap = loadImage(
                             "https://firebasestorage.googleapis.com/v0/b/b07project-d4d14.appspot." +
                                     "com/o/uploads%2Fno-image-available.jpg?alt=media&token=" +
                                     "7c5b44ac-7f76-459c-a8d2-a6376961505f");
                 } else {
-                    bitmap = loadImage(item.uri);
+                    bitmap = loadImage(item.getUri());
                 }
                 Log.w("BITMAP", "Generated");
 
-                if(!item.description.trim().isEmpty()) {
-                    description.setText(item.description);
-                    descriptionSize = max(21 - item.description.length() / 120, 5);
+                if(!item.getDescription().trim().isEmpty()) {
+                    description.setText(item.getDescription());
+                    descriptionSize = max(21 - item.getDescription().length() / 120, 5);
                 } else{
                     description.setText("No description available");
                 }
-                if(!item.name.trim().isEmpty()) {
-                    name.setText(item.name);
-                    nameSize = max(24 - item.name.length() / 40, 12);
+                if(!item.getName().trim().isEmpty()) {
+                    name.setText(item.getName());
+                    nameSize = max(24 - item.getName().length() / 40, 12);
                 } else{
                     name.setText("Unnamed");
                 }

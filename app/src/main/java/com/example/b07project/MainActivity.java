@@ -25,15 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-    /*
-        Button buttonAdmin = findViewById(button);
-        Button buttonBack = findViewById(R.id.back_button);
-        Button buttonRemove = findViewById(R.id.remove_button);
-        Button buttonAdd = findViewById(R.id.add_button);
-        Button buttonReport = findViewById(R.id.report_button);
-        Button buttonSearch = findViewById(R.id.search_button);*/
-
         if(savedInstanceState == null) {
             loadFragment(new RecyclerViewFragment());
         }

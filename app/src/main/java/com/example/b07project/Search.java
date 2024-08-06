@@ -30,13 +30,13 @@ public class Search {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String lotNumber = snapshot.getKey();
                         Item item = snapshot.getValue(Item.class);
-                        Log.i("VALUEGOT", item.name);
+                        Log.i("VALUEGOT", item.getName());
                         assert lotNumber != null;
                         assert item != null;
-                        item.lotNumber = Integer.parseInt(lotNumber);
+                        item.setLotNumber(Integer.parseInt(lotNumber));
                         itemList.add(item);
                     }
-                    Log.i("YESIN", itemList.get(1).name);
+                    Log.i("YESIN", itemList.get(1).getName());
 
                     printItemList(itemList);
                     callback.onDataRead(itemList);
@@ -66,7 +66,7 @@ public class Search {
 
                 Item item = dataSnapshot.getValue(Item.class);
                 if (item != null) {
-                    item.lotNumber = lotNumber;
+                    item.setLotNumber(lotNumber);
                     searchList.add(item);
                     printSearchList(searchList);
                 } else {
@@ -102,7 +102,7 @@ public class Search {
                     if (snapshot.getKey() != null) {
                         assert item != null;
                         try {
-                            item.lotNumber = parseInt((snapshot.getKey()));
+                            item.setLotNumber(parseInt((snapshot.getKey())));
                         } catch (Exception e) {
                             Log.w(TAG, "Lot Number is a String." + snapshot.getKey());
                         }
@@ -114,14 +114,14 @@ public class Search {
                         if (name.isEmpty() && category.isEmpty() && period.isEmpty()) {
                             matches = false;
                         }
-                        if (!name.isEmpty() && !item.name.equalsIgnoreCase(name)
+                        if (!name.isEmpty() && !item.getName().equalsIgnoreCase(name)
                         ) {
                             matches = false;
                         }
-                        if (!category.isEmpty() && !item.category.equalsIgnoreCase(category)) {
+                        if (!category.isEmpty() && !item.getCategory().equalsIgnoreCase(category)) {
                             matches = false;
                         }
-                        if (!period.isEmpty() && !item.period.equalsIgnoreCase(period)) {
+                        if (!period.isEmpty() && !item.getPeriod().equalsIgnoreCase(period)) {
                             matches = false;
                         }
                         if (matches) {
@@ -148,7 +148,7 @@ public class Search {
 
         if (!(searchList.isEmpty())) {
             for (Item item : searchList) {
-                Log.d(TAG, "(Searched Item) LotNumber: " + item.lotNumber + ", Item name: " + item.name + ", description: " + item.description + ", category: " + item.category + ", period: " + item.period + ", uri: " + item.uri);
+                Log.d(TAG, "(Searched Item) LotNumber: " + item.getLotNumber() + ", Item name: " + item.getName() + ", description: " + item.getDescription() + ", category: " + item.getCategory() + ", period: " + item.getPeriod() + ", uri: " + item.getUri());
             }
         } else {
             Log.d(TAG, "No Items Found with that search");
@@ -165,7 +165,7 @@ public class Search {
     static void printItemList(List<Item> itemList) {
 
         for (Item item : itemList) {
-            Log.d(TAG, "LotNumber: " + item.lotNumber + ", Item name: " + item.name + ", description: " + item.description + ", category: " + item.category + ", period: " + item.period + ", uri: " + item.uri);
+            Log.d(TAG, "LotNumber: " + item.getLotNumber() + ", Item name: " + item.getName() + ", description: " + item.getDescription() + ", category: " + item.getCategory() + ", period: " + item.getPeriod() + ", uri: " + item.getUri());
         }
 
     }

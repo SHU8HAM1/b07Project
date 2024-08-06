@@ -2,12 +2,12 @@ package com.example.b07project;
 
 
 public class Item {
-    public String category;
-    public String description;
-    public int lotNumber;
-    public String name;
-    public String period;
-    public String uri;
+    private String category;
+    private String description;
+    private int lotNumber;
+    private String name;
+    private String period;
+    private String uri;
     public Item() {
         // Default constructor
     }
