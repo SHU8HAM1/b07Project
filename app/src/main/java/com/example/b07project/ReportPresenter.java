@@ -152,7 +152,7 @@ public class ReportPresenter {
             fragment.displayMessage(context, "Query cannot be empty");
         }
         else if(selectedItem.equals("Lot Number")){
-            int lot_num = -10001;
+            int lot_num = -1;
             try {
                 lot_num = parseInt(query);
             }
@@ -395,13 +395,13 @@ public class ReportPresenter {
 
                 if(!item.description.trim().isEmpty()) {
                     description.setText(item.description);
-                    descriptionSize = max(21 - item.description.length() / 120, 5);
+                    descriptionSize = max(16 - item.description.length() / 120, 6);
                 } else{
                     description.setText("No description available");
                 }
                 if(!item.name.trim().isEmpty()) {
                     name.setText(item.name);
-                    nameSize = max(24 - item.name.length() / 40, 12);
+                    nameSize = max(16 - item.name.length() / 40, 7);
                 } else{
                     name.setText("Unnamed");
                 }
