@@ -39,10 +39,10 @@ public class AddItemModel{
 
     public void addItem(Item newItem){
 
-        itemRef.child(String.valueOf(newItem.lotNumber)).setValue(newItem).addOnCompleteListener(
+        itemRef.child(String.valueOf(newItem.getLotNumber())).setValue(newItem).addOnCompleteListener(
                 task -> {
-                    updatePathValue("Categories", newItem.category);
-                    updatePathValue("Periods", newItem.period);
+                    updatePathValue("Categories", newItem.getCategory());
+                    updatePathValue("Periods", newItem.getPeriod());
                     presenter.setAdded(task.isSuccessful());
                 });
     }

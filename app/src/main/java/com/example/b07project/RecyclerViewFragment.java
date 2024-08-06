@@ -110,8 +110,6 @@ public class RecyclerViewFragment extends Fragment {
         buttonRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // under is an example of changing the array for the items to remove
-                //RemoveFragment.lotNumbers = new int[]{1010};
                 RemoveFragment.lotNumbers = new int[ItemAdapter.selectedItemLot.size()];
                 for (int i = 0; i < ItemAdapter.selectedItemLot.size(); i++) {
                     RemoveFragment.lotNumbers[i] = ItemAdapter.selectedItemLot.get(i);
@@ -131,7 +129,6 @@ public class RecyclerViewFragment extends Fragment {
             buttonAdd.setVisibility(View.VISIBLE);
             buttonReport.setVisibility(View.VISIBLE);
             buttonRemove.setVisibility(View.VISIBLE);
-//            buttonBack.setVisibility(View.VISIBLE);
 
         }
         return view;
