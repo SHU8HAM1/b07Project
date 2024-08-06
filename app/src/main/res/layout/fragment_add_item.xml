@@ -24,17 +24,18 @@
         android:id="@+id/editName"
         android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/spinnerCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLotNumber" />
+        app:layout_constraintStart_toEndOf="@+id/textName"
+        app:layout_constraintTop_toBottomOf="@+id/editLotNumber"
+        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/textLotNumber"
         android:layout_width="128dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
         android:gravity="start|center"
         android:text="@string/lot_number"
@@ -53,6 +54,7 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textLotNumber"
         app:layout_constraintTop_toTopOf="parent"
         tools:hint="Example: 12345678" />
@@ -61,7 +63,7 @@
         android:id="@+id/textCategory"
         android:layout_width="128dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:gravity="start|center"
         android:text="@string/category"
         android:textColor="@color/black"
@@ -79,42 +81,44 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textCategory"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <TextView
         android:id="@+id/textPeriod"
         android:layout_width="128dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:gravity="start|center"
         android:text="@string/period"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/spinnerPeriod"
         app:layout_constraintBottom_toTopOf="@+id/textDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCategory"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintTop_toBottomOf="@+id/textCategory" />
 
     <Spinner
         android:id="@+id/spinnerPeriod"
         android:layout_width="260dp"
         android:layout_height="48dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="7dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textPeriod"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategory"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.507" />
 
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="128dp"
         android:layout_height="48dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="416dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="484dp"
         android:gravity="start|center"
         android:text="@string/description"
         android:textColor="@color/black"
@@ -135,16 +139,17 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textDescription"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
+        app:layout_constraintVertical_bias="0.475"
         tools:hint="Provide details" />
 
     <TextView
         android:id="@+id/textUpload"
         android:layout_width="128dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:gravity="start|center"
         android:text="@string/picture_video"
         android:textColor="@color/black"
@@ -152,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDescription"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.231" />
 
     <Button
         android:id="@+id/buttonUpload"
@@ -163,9 +168,10 @@
         android:text="Upload File Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textUpload"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.604" />
 
     <Button
         android:id="@+id/buttonSubmit"

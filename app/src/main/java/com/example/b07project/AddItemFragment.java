@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class AddItemFragment extends Fragment{
     private EditText editLotNumber, editName, editDescription;
     private Spinner spinnerCategory, spinnerPeriod;
-    private Button buttonUpload, buttonSubmit;
+    private Button buttonUpload, buttonSubmit, buttonBack;
     private AddItemPresenter presenter;
 
     private Uri uri;
@@ -43,7 +43,7 @@ public class AddItemFragment extends Fragment{
         spinnerPeriod = view.findViewById(R.id.spinnerPeriod);
         buttonUpload = view.findViewById(R.id.buttonUpload);
         buttonSubmit = view.findViewById(R.id.buttonSubmit);
-        Button buttonBack = view.findViewById(R.id.buttonBack);
+        buttonBack = view.findViewById(R.id.buttonBack);
 
         presenter = new AddItemPresenter(this);
 
@@ -58,7 +58,7 @@ public class AddItemFragment extends Fragment{
                 }
         );
 
-        buttonUpload.setOnClickListener(new View.OnClickListener() {
+        /*buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseFile();
@@ -69,8 +69,9 @@ public class AddItemFragment extends Fragment{
            public void onClick(View v) {
                submit();
            }
-        });
-
+        });*/
+        buttonUpload.setOnClickListener(v -> chooseFile());
+        buttonSubmit.setOnClickListener(v -> submit());
         buttonBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         return view;
