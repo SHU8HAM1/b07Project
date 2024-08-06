@@ -80,14 +80,14 @@ public class ReportPresenter {
             fragment.displayMessage(context, "Query cannot be empty");
         }
         else if(selectedItem.equals("Lot Number")){
-            int lot_num = -10001;
+            int lot_num = -1;
             try {
                 lot_num = parseInt(query);
             }
             catch(Exception e){
                 fragment.displayMessage(context,"Not a number. Please enter a valid number.");
             }
-            if(lot_num != -1001) {
+            if(lot_num != -1) {
                 Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
                     @Override
                     public void onDataRead(List<Item> itemList) {
@@ -159,7 +159,7 @@ public class ReportPresenter {
             catch(Exception e){
                 fragment.displayMessage(context,"Not a number. Please enter a valid number.");
             }
-            if(lot_num != -1001) {
+            if(lot_num != -1) {
                 Search.searchByLotNumber(itemsRef, lot_num, new Search.DataReadCallback() {
                     @Override
                     public void onDataRead(List<Item> itemList) {
